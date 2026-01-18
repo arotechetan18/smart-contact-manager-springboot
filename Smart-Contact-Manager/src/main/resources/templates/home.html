@@ -1,24 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::script})}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .container{
-            background-color: aqua;
-            color: blueviolet;
-        }
-    </style>
+  <title>home page</title> 
+
 </head>
 <body>
-    <div class="container">
-        <h1>welcome to homepage
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                 Exercitationem error corporis non optio aperiam nobis nisi n
-                 ihil, minus sequi, ab odio inventore harum, amet nam qui i
-                 ncidunt! Et, nemo explicabo?20</p>
-        </h1>
-    </div>
+<div id="content">
+<h1>welcome to home page</h1>
+<p>Lorem ipsum dolor sit amet consectetur adipi
+    sicing elit. Aut illo, harum minus ducimus ea nesciunt accusantium eligendi alias deserunt, excepturi libero ab aliquid voluptat
+    em architecto fugit voluptates impedit atque deleniti?</p>
+</div >
+<script>
+    console.log("this in home page")
+</script>
 </body>
 </html>
