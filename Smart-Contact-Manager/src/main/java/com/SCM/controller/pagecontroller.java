@@ -30,5 +30,21 @@ System.out.println("homepage handler");
         return "services";
     }
 
+      @RequestMapping("/contact")
+    public String contact(){
+        System.out.println("about page");
+        return "contact";
+    }
+
+      @RequestMapping("/login")
+    public String login(){
+        System.out.println("about page");
+        return "login";
+    }
+      @RequestMapping("/register")
+    public String register(){
+        System.out.println("about page");
+        return "register";
+    }
 
 }

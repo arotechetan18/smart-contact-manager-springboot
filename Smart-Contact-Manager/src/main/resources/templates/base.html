@@ -1,6 +1,9 @@
-<!DOCTYPE html>
-<html lang="en"
-th:fragment="parent(content,title,script)"
+<!DOCTYPE html >
+<html 
+
+
+lang="en"
+th:fragment="parent(content,title,script,navbar)"
 xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
@@ -8,19 +11,30 @@ xmlns:th="http://www.thymeleaf.org" >
       <title data-th-replace="${title}">SCM</title>
          <link rel="stylesheet" data-th-href="@{'css/output.css'}" />
           <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
 </head>
-<body>
-<div></div>
+<body class="bg-white dark:bg-gray-900 text-black dark:text-white">
+
+
 <!-- commen header  -->
+<div data-th-replace="navbar :: navbar" ></div>
+<br><br>
+
     <!-- main page content -->
- <section data-th-replace="${content}"></section>
+<div class="p-5 min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white" > <section data-th-replace="${content}"></section></div>
 
 
  <!-- comman footer -->
+
+ <footer>
+    footer:learn with chetan and code with chetan
+ </footer>
    
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    <script data-th-src="@{'/js/script.js'}">
+
+    </script>
     <th:block data-th-replace="${script}"></th:block>
 </body>
 </html>
