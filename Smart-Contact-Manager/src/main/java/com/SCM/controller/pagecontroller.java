@@ -11,4 +11,24 @@ public class pagecontroller {
 System.out.println("homepage handler");
         return "home";
     }
+    @RequestMapping("/about")
+    public String about(){
+        System.out.println("about page");
+        return "about";
+    }
+
+    @RequestMapping("/base")
+    public String base(){
+        System.out.println("about page");
+        return "base";
+    }
+
+    
+        @RequestMapping("/services")
+    public String services(){
+        System.out.println("about page");
+        return "services";
+    }
+
+
 }
