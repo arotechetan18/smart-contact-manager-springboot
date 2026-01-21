@@ -1,0 +1,126 @@
+<!doctype html>
+<html
+  lang="en"
+  th:replace="~{base::parent(~{::#content},~{::title},~{::script},~{::navbar})}"
+>
+  <head>
+    <title>signup page</title>
+  </head>
+
+  <body
+    class="bg-slate-100 dark:bg-slate-900 colo transition-colors duration-300"
+  >
+    <div id="content">
+      <div class="flex items-center justify-center px-4 py-10">
+        <div class="w-full max-w-2xl">
+          <div
+            class="p-6 sm:p-8 bg-white border border-gray-200 rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700 max-h-[85vh] overflow-y-auto"
+          >
+            <header class="mb-6">
+              <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+                Signup Here
+              </h2>
+              <p class="text-base text-gray-600 dark:text-gray-400">
+                Start managing contacts on cloud ...
+              </p>
+            </header>
+
+            <form action="#" class="space-y-6">
+              <div>
+                <label
+                  for="name"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Name</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  class="bg-gray-200 border border-gray-300 text-black text-lg rounded-lg block w-full p-5 placeholder:text-gray-400 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white dark:placeholder-gray-500 dark:focus:ring-blue-400 dark:focus:border-blue-400"
+                  placeholder="Enter your name"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="email"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  class="bg-gray-200 border border-gray-300 text-black text-lg rounded-lg block w-full p-5 placeholder:text-gray-400 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white dark:placeholder-gray-500 dark:focus:ring-blue-400 dark:focus:border-blue-400"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="password"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  id="password"
+                  class="bg-gray-200 border border-gray-300 text-black text-lg rounded-lg block w-full p-5 placeholder:text-gray-400 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white dark:placeholder-gray-500 dark:focus:ring-blue-400 dark:focus:border-blue-400"
+                  placeholder="Enter your password"
+                  required
+                />
+              </div>
+
+              <div>
+                <label
+                  for="phone"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Contact Number</label
+                >
+                <input
+                  type="number"
+                  id="phone"
+                  class="bg-gray-200 border border-gray-300 text-black text-lg rounded-lg block w-full p-5 placeholder:text-gray-400 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white dark:placeholder-gray-500 dark:focus:ring-blue-400 dark:focus:border-blue-400"
+                  placeholder="Enter your Number"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="about"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Write something about yourself
+                </label>
+
+                <textarea
+                  id="about"
+                  rows="4"
+                  class="bg-gray-200 border border-gray-300 text-black text-lg rounded-lg block w-full p-5 placeholder:text-gray-400 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white dark:placeholder:text-gray-500 dark:focus:ring-blue-400 dark:focus:border-blue-400"
+                  placeholder="Write here..."
+                ></textarea>
+              </div>
+
+              <div class="mt-4 flex gap-3">
+                <button
+                  type="submit"
+                  class="px-6 py-2 rounded bg-blue-700 dark:bg-[#2e4f77] text-white hover:bg-[#517095] transition"
+                >
+                  Signup
+                </button>
+
+                <button
+                  type="reset"
+                  class="px-6 py-2 rounded bg-red-600 text-white hover:bg-red-300 transition"
+                >
+                  Reset
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      console.log("this in signup page");
+    </script>
+  </body>
+</html>
