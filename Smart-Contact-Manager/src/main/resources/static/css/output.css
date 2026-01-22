@@ -607,10 +607,6 @@ video {
   height: 2rem;
 }
 
-.max-h-\[85vh\] {
-  max-height: 85vh;
-}
-
 .min-h-screen {
   min-height: 100vh;
 }
@@ -659,10 +655,6 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
-}
-
-.overflow-y-auto {
-  overflow-y: auto;
 }
 
 .rounded {
