@@ -26,7 +26,7 @@
               </p>
             </header>
                    <!-- name -->
-            <form data-th-action="@{'do-register'}" data-th-object="${userForm}" method="post" class="space-y-6">
+            <form data-th-action="@{'do-register'}" data-th-object="${userForm}" method="post" class="space-y-6" novalidate>
               <div>
                 <label
                   for="name"
@@ -40,8 +40,11 @@
                     th:field="*{name}"
                   class="bg-gray-200 border border-gray-300 text-black text-lg rounded-lg block w-full p-5 placeholder:text-gray-400 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white dark:placeholder-gray-500 dark:focus:ring-blue-400 dark:focus:border-blue-400"
                   placeholder="Enter your name"
-                  required
-                />
+                  required />
+                  <p
+                  data-th-if="${#fields.hasErrors('name')}"
+                  data-th-errors="*{name}"
+                  class="text-red-600 px-1 py-2"></p>
               </div>
               <!-- Email -->
               <div>
@@ -58,6 +61,10 @@
                   placeholder="Enter your email"
                   required
                 />
+                 <p
+                  data-th-if="${#fields.hasErrors('email')}"
+                  data-th-errors="*{email}"
+                  class="text-red-600 px-1 py-2"></p>
               </div>
               <!-- password -->
               <div>
@@ -73,6 +80,10 @@
                   placeholder="Enter your password"
                   required
                 />
+                 <p
+                  data-th-if="${#fields.hasErrors('password')}"
+                  data-th-errors="*{password}"
+                  class="text-red-600 px-1 py-2"></p>
               </div>
               <!-- contact number -->
 
@@ -89,6 +100,10 @@
                   placeholder="Enter your Number"
                   required
                 />
+                 <p
+                  data-th-if="${#fields.hasErrors('phoneNumber')}"
+                  data-th-errors="*{phoneNumber}"
+                  class="text-red-600 px-1 py-2"></p>
               </div>
               <!-- about yourself -->
               <div>
@@ -106,6 +121,10 @@
                   class="bg-gray-200 border border-gray-300 text-black text-lg rounded-lg block w-full p-5 placeholder:text-gray-400 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white dark:placeholder:text-gray-500 dark:focus:ring-blue-400 dark:focus:border-blue-400"
                   placeholder="Write here..."
                 ></textarea>
+                 <p
+                  data-th-if="${#fields.hasErrors('about')}"
+                  data-th-errors="*{about}"
+                  class="text-red-600 px-1 py-2"></p>
               </div>
                     <!-- signup button -->
               <div class="mt-4 flex gap-3">

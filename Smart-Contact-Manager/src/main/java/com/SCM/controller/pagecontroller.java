@@ -4,6 +4,7 @@ import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ import com.SCM.helpers.message;
 import com.SCM.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class pagecontroller {
@@ -24,37 +26,37 @@ public class pagecontroller {
     
     @RequestMapping("/home")
     public String home(){
-System.out.println("homepage handler");
+
         return "home";
     }
     @RequestMapping("/about")
     public String about(){
-        System.out.println("about page");
+      
         return "about";
     }
 
     @RequestMapping("/base")
     public String base(){
-        System.out.println("about page");
+     
         return "base";
     }
 
     
         @RequestMapping("/services")
     public String services(){
-        System.out.println("about page");
+
         return "services";
     }
 
       @RequestMapping("/contact")
     public String contact(){
-        System.out.println("about page");
+        
         return "contact";
     }
 
       @RequestMapping("/login")
     public String login(){
-        System.out.println("about page");
+      
         return "login";
     }
       @RequestMapping("/register")
@@ -63,7 +65,7 @@ System.out.println("homepage handler");
        
       
          model.addAttribute("userForm",UserForms); 
-        System.out.println("about page");
+      
         return "register";
     }
 
@@ -71,9 +73,19 @@ System.out.println("homepage handler");
     //processing register form data
 
     @RequestMapping(value = "do-register",method = RequestMethod.POST)
-    public String processResister(@ModelAttribute UserForms userForms,Model model,HttpSession session){
+   public String processResister(
+    @Valid @ModelAttribute("userForm") UserForms userForms,
+    BindingResult rBindingResult,
+    Model model,
+    HttpSession session)
+{
         System.out.println("processing register form");
         System.out.println(userForms);
+
+    //validation form data
+    if(rBindingResult.hasErrors()){
+   return "register";
+    }
 
     User user = new User();
     user.setName(userForms.getName());
