@@ -1,7 +1,6 @@
 package com.SCM.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -11,6 +10,7 @@ public class UserController {
     //user dashboard
     @RequestMapping("/dashboard")
     public String userDashboard(){
+        
 
         return "user/dashboard";
     }
@@ -18,7 +18,7 @@ public class UserController {
 
      @RequestMapping("/profile")
     public String userProfile(){
-
+  System.out.println("PROFILE CONTROLLER HIT");
         return "user/profile";
     }
 

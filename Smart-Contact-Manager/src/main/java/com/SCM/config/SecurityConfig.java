@@ -3,11 +3,11 @@ package com.SCM.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -45,26 +45,40 @@ public AuthenticationProvider authenticationProvider() {
     return daoAuthenticationProvider;
 }
 
+
 @Bean
-public SecurityFilterChain securityFilterChain( HttpSecurity httpSecurity) throws Exception {
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-    //coanfigure security filter chain
-    httpSecurity.authorizeHttpRequests(authorise->{
-        // authorise.requestMatchers("/home","/register","/services").permitAll();
+    http
+        .csrf(csrf -> csrf.disable())
+        .authorizeHttpRequests(auth -> {
+            auth.requestMatchers("/login", "/authenticate").permitAll();
+            auth.requestMatchers("/user/**").authenticated();
+            auth.anyRequest().permitAll();
+        })
+        .formLogin(form -> {
+            form.loginPage("/login");
+            form.loginProcessingUrl("/authenticate");
+            form.defaultSuccessUrl("/user/dashboard", true);
+            // form.failureUrl("/login?error=true");
+            form.usernameParameter("email");
+            form.passwordParameter("password");
+        });
 
-        authorise.requestMatchers("/user/**").authenticated();
-        authorise.anyRequest().permitAll();
-        try {
-            //form default login
-            httpSecurity.formLogin(Customizer.withDefaults());
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    });
 
-    return httpSecurity.build();
-    
+  http.logout(logoutform -> {
+      logoutform.logoutUrl("/do-logout");
+      logoutform.logoutSuccessUrl("/login?logout=true");
+  
+  });
+
+    return http.build();
+}
+
+@Bean
+public AuthenticationManager authenticationManager(
+        AuthenticationConfiguration configuration) throws Exception {
+    return configuration.getAuthenticationManager();
 }
 
 

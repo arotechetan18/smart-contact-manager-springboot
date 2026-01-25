@@ -6,22 +6,40 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.SCM.entities.User;
 import com.SCM.repositories.Userepo;
-
 @Service
-public class SecurityCustomUserDetailService implements UserDetailsService{
+public class SecurityCustomUserDetailService implements UserDetailsService {
 
-      @Autowired
-       private Userepo userRepo;
-       
+    @Autowired
+    private Userepo userRepository;
+
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-       //laod the user from databse
+    public UserDetails loadUserByUsername(String email)
+            throws UsernameNotFoundException {
 
-   userRepo.findByEmail(username).orElseThrow(()-> new UsernameNotFoundException("User not found with this email"+username));
-        return null;
-     
+       
+
+        if (email == null || email.trim().isEmpty()) {
+            throw new UsernameNotFoundException("Email is empty");
+        }
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException("User not found"));
+
+        if (!user.isEnabled()) {
+            throw new UsernameNotFoundException("User is disabled");
+        }
+
+        return org.springframework.security.core.userdetails.User
+                .withUsername(user.getEmail())
+                .password(user.getPassword())
+                .authorities("ROLE_USER")
+                .accountLocked(false)
+                .accountExpired(false)
+                .credentialsExpired(false)
+                .disabled(false)
+                .build();
     }
-
-
 }

@@ -1,18 +1,84 @@
 <!DOCTYPE html>
 <html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::script},~{::navbar})}">
+
 <head>
   <title>Login page</title>
 
 </head>
+
 <body>
-<div id="content">
-<h1>welcome to Login page</h1>
-<p>Lorem ipsum dolor sit amet consectetur adipi
-    sicing elit. Aut illo, harum minus ducimus ea nesciunt accusantium eligendi alias deserunt, excepturi libero ab aliquid voluptat
-    em architecto fugit voluptates impedit atque deleniti?</p>
-</div >
-<script>
+  <div id="content">
+    <div class="flex items-center justify-center px-4 py-10">
+      <div class="w-full max-w-2xl">
+        <!-- message box -->
+        <div th:replace="~{message::messagebox}"></div>
+
+        <div class="p-6 sm:p-8 bg-white border border-gray-200 rounded-xl shadow-2xl 
+                dark:bg-gray-800 dark:border-gray-700">
+          <header class="mb-6">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+              Login Here
+            </h2>
+            <p class="text-base text-gray-600 dark:text-gray-400">
+              Start managing contacts on cloud ...
+            </p>
+          </header>
+
+
+          <div class="text-red-600 text-center my-3" th:if="${param.error}">
+            Invalid username and password.
+          </div>
+          <div class="text-green-600 text-center my-3" th:if="${param.logout}">
+            You have been logged out.
+          </div>
+          <!-- name -->
+          <form class="space-y-6" method="post" data-th-action="@{'/authenticate'}" novalidate>
+
+            <!-- Username  -->
+            <div>
+              <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+              <input type="email" id="email" name="email"
+                class="bg-gray-200 border border-gray-300 text-black text-lg rounded-lg block w-full p-5 placeholder:text-gray-400 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white dark:placeholder-gray-500 dark:focus:ring-blue-400 dark:focus:border-blue-400"
+                placeholder="Enter your email" required />
+              <!-- <p
+                  data-th-if="${#fields.hasErrors('email')}"
+                  data-th-errors="*{email}"
+                  class="text-red-600 px-1 py-2"></p> -->
+            </div>
+            <!-- password -->
+            <div>
+              <label for="password"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+              <input type="password" id="password" name="password"
+                class="bg-gray-200 border border-gray-300 text-black text-lg rounded-lg block w-full p-5 placeholder:text-gray-400 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-700 dark:text-white dark:placeholder-gray-500 dark:focus:ring-blue-400 dark:focus:border-blue-400"
+                placeholder="Enter your password" required />
+              <!-- <p
+                  data-th-if="${#fields.hasErrors('password')}"
+                  data-th-errors="*{password}"
+                  class="text-red-600 px-1 py-2"></p> -->
+            </div>
+
+
+
+            <!-- signup button -->
+            <div class="mt-4 flex gap-3">
+              <button type="submit"
+                class="px-6 py-2 rounded bg-blue-700 dark:bg-[#2e4f77] text-white hover:bg-[#517095] transition">
+                Login
+              </button>
+
+              <button type="reset" class="px-6 py-2 rounded bg-red-600 text-white hover:bg-red-300 transition">
+                Reset
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
     console.log("this in login page")
-</script>
+  </script>
 </body>
+
 </html>
