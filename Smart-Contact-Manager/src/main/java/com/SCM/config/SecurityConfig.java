@@ -21,6 +21,9 @@ public class SecurityConfig {
     private SecurityCustomUserDetailService userDetailService;
     //use create and login using java code in memory service 
 
+    @Autowired
+    private oAuthAuthenticationSuccessHandler oAuthAuthenticationSuccessHandler;
+
 //     @Bean
 //     public UserDetailsService userDetailsService(){
 
@@ -71,6 +74,11 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
       logoutform.logoutSuccessUrl("/login?logout=true");
   
   });
+http.oauth2Login(oauth2 -> {
+    oauth2.loginPage("/login");
+    oauth2.successHandler(oAuthAuthenticationSuccessHandler);
+});
+
 
     return http.build();
 }
