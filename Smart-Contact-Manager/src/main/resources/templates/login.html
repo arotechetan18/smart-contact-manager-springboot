@@ -78,9 +78,21 @@
               </button>
             </div>
           </form>
-          <div class="social-buttons-container flex justify-center mt-5">
-            <a class="border-x-black hover:bg-gray-100 px-3 py-2 login-with-google-btn"
-              data-th-href="@{'/oauth2/authorization/google'} ">Log in with Google</a>
+         <div class="social-buttons-container flex flex-col sm:flex-row 
+            justify-center items-center mt-5 gap-4">
+
+            <a   class="login-with-google-btn border-2px border-gray-800 hover:border-gray-500 
+         transition"
+              data-th-href="@{'/oauth2/authorization/google'} ">Sign in with Google</a>
+
+      <a data-th-href="@{/oauth2/authorization/github}"
+   class="login-with-github-btn">
+  Sign in with GitHub
+</a>
+
+
+
+
           </div>
         </div>
       </div>
