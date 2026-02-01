@@ -93,48 +93,19 @@ user.setAbout("This account is created using google");
 
 
 
+ User user1 = userepo.findByEmail(user.getEmail()).orElse(null);
+
+if (user1 == null) {
+    userepo.save(user);
+    logger.info("NEW USER CREATED: {}", user.getEmail());
+} else {
+    logger.info("USER ALREADY EXISTS: {}", user1.getEmail());
+}
 
 
-        // logger.info(user.getName());
+new DefaultRedirectStrategy()
+        .sendRedirect(request, response, "/user/dashboard");
 
-        // user.getAttributes().forEach((key,value)->{
-        //     logger.info("{}=>{}",key,value);
-        // });
-
-        // logger.info(user.getAuthorities().toString());
-        /* 
-
-      //   String email = user.getAttribute("email").toString();
-      //   String name = user.getAttribute("name").toString();
-      //   String picture= user.getAttribute("picture").toString();
-      //   //crate suer and save to database 
-      //   User user=new User();
-      //   user.setEmail(email);
-      //   user.setName(name);
-      //   user.setProfilePic(picture);
-      //   user.setPassword(picture);
-      //   user.setUserid(UUID.randomUUID().toString());
-      //   user.setProvider(Providers.GOOGLE);
-      //   user.setEnabled(true);
-      //   user.setEmailVerified(true);
-      //   user.setRoleList(List.of(AppConstant.ROLE_USER));
-
-      //   user.setAbout("this acount is creted usin goggle");
-
-      // User user2=  userepo.findByEmail(email).orElse(null);
-
-      // if(user2==null){
-      //   userepo.save(user);
-      //   logger.info("new user created using google account"+email);
-      // }*/
-
- User user1 =userepo.findByEmail(user.getEmail()).orElse(null);
-       if(user1==null){
-        userepo.save(user);
-      
-        // Redirect to user dashboard or any other page
-       new DefaultRedirectStrategy().sendRedirect(request, response, "/user/dashboard");
-    }
 
 
 }

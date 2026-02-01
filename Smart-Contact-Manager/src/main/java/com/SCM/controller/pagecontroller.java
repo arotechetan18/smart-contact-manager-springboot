@@ -61,6 +61,12 @@ public class pagecontroller {
         return "contact";
     }
 
+    // do process user registration
+
+
+
+
+    //this is show login page
       @RequestMapping("/login")
     public String login(){
       
