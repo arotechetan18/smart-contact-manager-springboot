@@ -105,5 +105,11 @@ public class UserServiceImpl implements UserService {
         throw new UnsupportedOperationException("Unimplemented method 'saveUser'");
     }
 
+    @Override
+    public User getUserByEmail(String email) {
+
+        return userRepo.findByEmail(email).orElseThrow(()->new ResourceNotFoundException("user not found"));
+
+    }
 
 }

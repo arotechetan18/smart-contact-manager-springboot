@@ -1,0 +1,52 @@
+
+   <nav th:fragment="user-navbar"
+     class="fixed top-0 z-50 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+
+  <div class="max-w-screen-xl mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- LOGO -->
+      <a th:href="@{/home}" class="flex items-center gap-2">
+        <img th:src="@{/images/telephone.png}" class="h-8 w-8" alt="logo">
+        <span class="text-xl font-bold text-gray-900 dark:text-white">SCM</span>
+      </a>
+
+      <!-- MENU -->
+      <ul class="hidden md:flex items-center gap-8 font-medium">
+        <li>
+          <a th:href="@{/home}" class="text-blue-600 dark:text-blue-400">Home</a>
+        </li>
+        <li>
+          <a th:href="@{/about}" class="hover:text-blue-600">About</a>
+        </li>
+        <li>
+          <a th:href="@{/services}" class="hover:text-blue-600">Services</a>
+        </li>
+        <li>
+          <a th:href="@{/contact}" class="hover:text-blue-600">Contact</a>
+        </li>
+      </ul>
+
+      <!-- ACTIONS -->
+      <div class="flex items-center gap-3">
+
+        <!-- Theme Button -->
+      <button id="theme_change_button" class="bg-gray-400 px-4 py-2 rounded me-3 ">
+  <i class="fa-solid fa-circle-half-stroke"></i> <span>Light</span>
+</button>
+
+        <a th:href="@{/login}"
+           class="px-4 py-1.5 rounded bg-blue-600 text-white hover:bg-blue-700">
+       <span data-th-text="${loggedInUser.name}"> </span>
+        </a>
+
+        <a th:href="@{/register}"
+           class="px-4 py-1.5 rounded bg-blue-600 text-white hover:bg-blue-700">
+        Logout
+        </a>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
