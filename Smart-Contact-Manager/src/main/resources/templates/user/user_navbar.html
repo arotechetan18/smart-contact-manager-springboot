@@ -35,13 +35,13 @@
   <i class="fa-solid fa-circle-half-stroke"></i> <span>Light</span>
 </button>
 
-        <a th:href="@{/login}"
-           class="px-4 py-1.5 rounded bg-blue-600 text-white hover:bg-blue-700">
+        <a th:href="@{'/user/profile'}"
+           class="px-4 py-1.5 rounded bg--600 bg-green-700 text-white hover:bg-green-500">
        <span data-th-text="${loggedInUser.name}"> </span>
         </a>
 
-        <a th:href="@{/register}"
-           class="px-4 py-1.5 rounded bg-blue-600 text-white hover:bg-blue-700">
+        <a th:href="@{/do-logout}"
+           class="px-4 py-1.5 rounded bg-red-700 text-white hover:bg-red-300">
         Logout
         </a>
       </div>
