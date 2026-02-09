@@ -1,13 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::script},~{::navbar})}"
+>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<title th:text="${loggedInUser.name + ' | Dashboard'}">profile page</title>
+
+
+
 </head>
 <body>
-    <h1>this is user dashboard</h1>
-    
-    <a data-th-href="@{'/do-logout'}">logout</a>
+<div id="content">
+    <div>
+          <!-- user is log in :sidebar -->
+  <div th:if="${loggedInUser}">
+    <div data-th-replace="~{user/sidebar::sidebar}"></div>
+  </div>
+        
+<h1>welcome to dashboard</h1>
+<p>Lorem ipsum dolor sit amet consectetur adipi
+    sicing elit. Aut illo, harum minus ducimus ea nesciunt accusantium eligendi alias deserunt, excepturi libero ab aliquid voluptat
+    em architecto fugit voluptates impedit atque deleniti?</p>
+     <a data-th-href="@{'/do-logout'}">logout</a>
+</div></div>
+<script>
+    console.log("this in dashboard page")
+</script>
 </body>
 </html>
+    
+   

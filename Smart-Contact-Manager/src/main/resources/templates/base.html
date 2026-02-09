@@ -21,16 +21,17 @@
     <div data-th-replace="~{user/user_navbar::user-navbar}"></div>
   </div>
 
-  <!-- user is log in :sidebar -->
-  <div th:if="${loggedInUser}">
-    <div data-th-replace="~{user/sidebar::sidebar}"></div>
-  </div>
+
 
   <!-- user is not logged : navbar -->
   <div th:unless="${loggedInUser}">
     <div data-th-replace="~{navbar :: navbar}"></div>
   </div>
 
+<!-- user is logged in : sidebar -->
+<div th:if="${loggedInUser}">
+  <div data-th-replace="~{user/sidebar::sidebar}"></div>
+</div>
 
 
 
@@ -55,6 +56,9 @@
   <script data-th-src="@{'/js/script.js'}">
 
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+  
   <th:block data-th-replace="${script}"></th:block>
 </body>
 

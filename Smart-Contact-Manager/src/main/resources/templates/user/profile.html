@@ -2,18 +2,24 @@
 <html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::script},~{::navbar})}"
 >
 <head>
-<title th:text="${loggedInUser.name + ' | SCM'}">profile page</title>
+<title th:text="${loggedInUser.name + ' | Dashboard'}">profile page</title>
 
 
 
 </head>
 <body>
 <div id="content">
+    <div>
+          <!-- user is log in :sidebar -->
+  <div th:if="${loggedInUser}">
+    <div data-th-replace="~{user/sidebar::sidebar}"></div>
+  </div>
+        
 <h1>welcome to User profile</h1>
 <p>Lorem ipsum dolor sit amet consectetur adipi
     sicing elit. Aut illo, harum minus ducimus ea nesciunt accusantium eligendi alias deserunt, excepturi libero ab aliquid voluptat
     em architecto fugit voluptates impedit atque deleniti?</p>
-</div >
+</div></div>
 <script>
     console.log("this in profile page")
 </script>
