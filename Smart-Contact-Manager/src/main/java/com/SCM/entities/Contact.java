@@ -24,26 +24,24 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "contacts")
 public class Contact {
-    @Id
-    private String Id;
-    private String name;
-    private String email;   
-    private String phoneNumber;
-    private String address;
-    private String picture;
-    @Column(length = 500)
-    private String description;
-    private boolean favourite=false;
-    private String WebsiteLink;
-   
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+  @Id
+  private String id;
 
-      @OneToMany(
-    mappedBy = "contact",
-    cascade = CascadeType.ALL,
-    fetch = FetchType.EAGER,
-    orphanRemoval = true
-)private List<Socialink> links =new ArrayList<>();
+  private String name;
+  private String email;
+  private String phoneNumber;
+  private String address;
+  private String picture;
+  @Column(length = 500)
+  private String description;
+  private boolean favourite = false;
+  private String WebsiteLink;
+  private String LinkdInLink;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id")
+  private User user;
+
+  @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+  private List<Socialink> links = new ArrayList<>();
 }
