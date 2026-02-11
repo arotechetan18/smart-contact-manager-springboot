@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +13,13 @@ import com.SCM.entities.Contact;
 import com.SCM.entities.User;
 import com.SCM.forms.Contactform;
 import com.SCM.helpers.Helper;
+import com.SCM.helpers.MessageType;
+import com.SCM.helpers.message;
 import com.SCM.services.ContactService;
 import com.SCM.services.UserService;
+
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/user/contacts")
@@ -39,10 +45,26 @@ model.addAttribute("contactForm", contactForm);
     }
 @PostMapping("/add")
 
-public String saveContact(@ModelAttribute("contactForm") Contactform contactForm,Authentication authentication) {
+public String saveContact(@Valid  @ModelAttribute("contactForm") Contactform contactForm,BindingResult result,
+Authentication authentication,HttpSession session,Model model) {
 //process the form data
 
 String username=Helper.getEmailofLoggedinUser(authentication);
+
+//validate the form
+if(result.hasErrors()){
+
+    User user = userService.getUserByEmail(username);
+    model.addAttribute("loggedInUser", user);
+
+    session.setAttribute("message", message.builder()
+            .content("please correct the following errors")
+            .type(MessageType.red)
+            .build());
+
+    return "user/add_contact";
+}
+
 
 // form covert into contact
 
@@ -64,6 +86,13 @@ contact.setLinkdInLink(contactForm.getLinkedInLink());
  contactService.save(contact);
 
     System.out.println(contactForm);
+
+    session.setAttribute("message",message.builder()
+    .content("You have successfully saved contact.")
+    .type(MessageType.green)
+    .build()
+                         
+);
 
     return "redirect:/user/contacts/add";
 }

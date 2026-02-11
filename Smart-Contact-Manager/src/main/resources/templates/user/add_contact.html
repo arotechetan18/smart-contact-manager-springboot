@@ -35,17 +35,15 @@
             <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
               Add New Contact
             </h1>
+            <div data-th-replace="message::messagebox"></div>
             <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
               This contact will be stored on cloud, you can directly email this client from SCM.
             </p>
           </div>
 
           <!-- FORM -->
-        <form class="space-y-5"
-      data-th-action="@{/user/contacts/add}"
-      data-th-object="${contactForm}"
-      method="POST"
-      enctype="multipart/form-data">
+          <form class="space-y-5" data-th-action="@{/user/contacts/add}" data-th-object="${contactForm}" method="POST"
+            enctype="multipart/form-data">
 
 
             <!-- name -->
@@ -54,16 +52,21 @@
                 Contact Name
               </label>
               <div class="relative">
-                <i class="fa-regular fa-user absolute left-3 top-1/2 -translate-y-1/2
-                                      text-gray-400 dark:text-gray-500"></i>
+
+                <div class="absolute left-3 top-0 h-full flex items-center pointer-events-none">
+                  <i class="fa-regular fa-user text-gray-400 dark:text-gray-500"></i>
+                </div>
+
                 <input type="text" data-th-field="*{name}" placeholder="Enter full name" class="w-full h-11 pl-10 pr-3 rounded-lg
-                                          bg-gray-50 dark:bg-slate-700/60
-                                          text-gray-900 dark:text-white
-                                          placeholder-gray-400 dark:placeholder-gray-500
-                                          border border-gray-300 dark:border-slate-600
-                                          focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-                                          outline-none transition">
+                  bg-gray-50 dark:bg-slate-700/60
+                  text-gray-900 dark:text-white
+                  border border-gray-300 dark:border-slate-600
+                  focus:ring-2 focus:ring-blue-500
+                  outline-none transition">
+                <p class="text-red-500" data-th-if="${#fields.hasErrors('name')}" data-th-errors="*{name}">Invalid Name
+                </p>
               </div>
+
             </div>
 
             <!-- Email -->
@@ -72,15 +75,19 @@
                 Contact Email
               </label>
               <div class="relative">
-                <i class="fa-regular fa-envelope absolute left-3 top-1/2 -translate-y-1/2
-                                      text-gray-400 dark:text-gray-500"></i>
+
+                <div class="absolute left-3 top-0 h-full flex items-center pointer-events-none">
+                  <i class="fa-regular fa-envelope text-gray-400 dark:text-gray-500"></i>
+                </div>
+
                 <input type="email" data-th-field="*{email}" placeholder="example@gmail.com" class="w-full h-11 pl-10 pr-3 rounded-lg
-                                          bg-gray-50 dark:bg-slate-700/60
-                                          text-gray-900 dark:text-white
-                                          placeholder-gray-400 dark:placeholder-gray-500
-                                          border border-gray-300 dark:border-slate-600
-                                          focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-                                          outline-none transition">
+                  bg-gray-50 dark:bg-slate-700/60
+                  text-gray-900 dark:text-white
+                  border border-gray-300 dark:border-slate-600
+                  focus:ring-2 focus:ring-blue-500
+                  outline-none transition">
+                <p class="text-red-500" data-th-if="${#fields.hasErrors('email')}" data-th-errors="*{email}">Invalid
+                  Email ***</p>
               </div>
             </div>
 
@@ -90,15 +97,19 @@
                 Contact Phone
               </label>
               <div class="relative">
-                <i class="fa-solid fa-phone absolute left-3 top-1/2 -translate-y-1/2
-                                      text-gray-400 dark:text-gray-500"></i>
+
+                <div class="absolute left-3 top-0 h-full flex items-center pointer-events-none">
+                  <i class="fa-solid fa-phone text-gray-400 dark:text-gray-500"></i>
+                </div>
+
                 <input type="tel" data-th-field="*{phoneNumber}" placeholder="+91 XXXXXXXXXX" class="w-full h-11 pl-10 pr-3 rounded-lg
-                                          bg-gray-50 dark:bg-slate-700/60
-                                          text-gray-900 dark:text-white
-                                          placeholder-gray-400 dark:placeholder-gray-500
-                                          border border-gray-300 dark:border-slate-600
-                                          focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-                                          outline-none transition">
+                  bg-gray-50 dark:bg-slate-700/60
+                  text-gray-900 dark:text-white
+                  border border-gray-300 dark:border-slate-600
+                  focus:ring-2 focus:ring-blue-500
+                  outline-none transition">
+                <p class="text-red-500" data-th-if="${#fields.hasErrors('phoneNumber')}"
+                  data-th-errors="*{phoneNumber}">Invalid Phone Number</p>
               </div>
             </div>
 
@@ -114,6 +125,8 @@
                                          border border-gray-300 dark:border-slate-600
                                          focus:ring-2 focus:ring-blue-500 focus:border-blue-500
                                          outline-none transition"></textarea>
+              <p class="text-red-500" data-th-if="${#fields.hasErrors('address')}" data-th-errors="*{address}">Address
+                is Required***</p>
             </div>
             <!-- CONTACT DESCRIPTION -->
             <div>
@@ -121,7 +134,8 @@
                 Contact Description
               </label>
 
-              <textarea rows="4" data-th-field="*{description}" placeholder="Write something about this contact..." class="w-full rounded-lg p-3
+              <textarea rows="4" data-th-field="*{description}" placeholder="Write something about this contact..."
+                class="w-full rounded-lg p-3
            bg-gray-50 dark:bg-slate-700/60
            text-gray-900 dark:text-white
            placeholder-gray-400 dark:placeholder-gray-500
@@ -135,19 +149,26 @@
             <!-- links add -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div class="relative">
-                <i class="fa-solid fa-link absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <div class="absolute left-3 top-0 h-full flex items-center pointer-events-none">
+                  <i class="fa-brands fa-linkedin text-gray-400 dark:text-gray-500"></i>
+                </div>
+
                 <input type="text" data-th-field="*{linkedInLink}" placeholder="LinkedIn Profile" class="w-full h-10 pl-10 pr-3 rounded-lg
-                                          bg-gray-50 dark:bg-slate-700/60
-                                          border border-gray-300 dark:border-slate-600
-                                          text-sm text-gray-900 dark:text-white">
+                  bg-gray-50 dark:bg-slate-700/60
+                  border border-gray-300 dark:border-slate-600
+                  text-gray-900 dark:text-white">
               </div>
 
               <div class="relative">
-                <i class="fa-solid fa-earth-americas absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+
+                <div class="absolute left-3 top-0 h-full flex items-center pointer-events-none">
+                  <i class="fa-solid fa-globe text-gray-400 dark:text-gray-500"></i>
+                </div>
+
                 <input type="text" data-th-field="*{websiteLink}" placeholder="Website" class="w-full h-10 pl-10 pr-3 rounded-lg
-                                          bg-gray-50 dark:bg-slate-700/60
-                                          border border-gray-300 dark:border-slate-600
-                                          text-sm text-gray-900 dark:text-white">
+                  bg-gray-50 dark:bg-slate-700/60
+                  border border-gray-300 dark:border-slate-600
+                  text-gray-900 dark:text-white">
               </div>
             </div>
 
@@ -185,11 +206,8 @@
                     PNG, JPG (Max 5MB)
                   </p>
 
-                 <input id="image_file_input"
-       type="file"
-       accept="image/*"
-       data-th-field="*{profileImage}"
-       class="hidden" />
+                  <input id="image_file_input" type="file" accept="image/*" data-th-field="*{profileImage}"
+                    class="hidden" />
 
                 </label>
 
