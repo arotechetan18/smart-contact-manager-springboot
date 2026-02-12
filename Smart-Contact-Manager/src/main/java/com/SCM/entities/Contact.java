@@ -3,6 +3,8 @@ package com.SCM.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,9 +40,14 @@ public class Contact {
   private String WebsiteLink;
   private String LinkdInLink;
 
+  private String CloudinaryImagePublicId;
+
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
   private User user;
+
+
+
 
   @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Socialink> links = new ArrayList<>();

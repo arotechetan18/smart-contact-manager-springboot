@@ -2,6 +2,8 @@ package com.SCM.forms;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.SCM.Validaters.ValidFile;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -42,8 +44,11 @@ private String websiteLink;
 
 private String linkedInLink;
 
+//annotation create for file validate
+//size and resoluction
 
-    private MultipartFile profileImage;
+   @ValidFile
+    private MultipartFile contactImage;
 
 
 }

@@ -182,34 +182,48 @@
                 </label>
 
                 <!-- Upload Box -->
-                <label for="image_file_input" class="flex flex-col items-center justify-center
-             w-full h-40
-             border-2 border-dashed
-             border-blue-400 dark:border-blue-500
-             rounded-xl cursor-pointer
-             bg-blue-50 hover:bg-blue-100
-             dark:bg-slate-700 dark:hover:bg-slate-600
-             transition">
+     <label for="image_file_input" 
+       class="relative flex flex-col items-center justify-center
+       w-full h-40
+       border-2 border-dashed
+       border-blue-400 dark:border-blue-500
+       rounded-xl cursor-pointer
+       bg-blue-50 hover:bg-blue-100
+       dark:bg-slate-700 dark:hover:bg-slate-600
+       transition overflow-hidden">
 
-                  <i class="fa-solid fa-cloud-arrow-up
-                text-3xl
-                text-blue-600 dark:text-blue-400
-                mb-2"></i>
+  <!-- Upload Content -->
+  <div id="upload_content" class="flex flex-col items-center justify-center">
+    <i class="fa-solid fa-cloud-arrow-up
+       text-3xl
+       text-blue-600 dark:text-blue-400
+       mb-2"></i>
 
-                  <p class="text-sm font-semibold
-                text-blue-700 dark:text-blue-300">
-                    Click to upload image
-                  </p>
+    <p class="text-sm font-semibold
+       text-blue-700 dark:text-blue-300">
+      Click to upload image
+    </p>
 
-                  <p class="text-xs
-                text-gray-600 dark:text-gray-400 mt-1">
-                    PNG, JPG (Max 5MB)
-                  </p>
+    <p class="text-xs
+       text-gray-600 dark:text-gray-400 mt-1">
+      PNG, JPG (Max 5MB)
+    </p>
+  </div> 
 
-                  <input id="image_file_input" type="file" accept="image/*" data-th-field="*{profileImage}"
-                    class="hidden" />
+  <!-- Image Preview Inside Box -->
+  <img id="upload_image_preview"
+       class="absolute inset-0 w-full h-full object-cover hidden"
+       alt="Preview" />
 
-                </label>
+  <input id="image_file_input"
+         type="file"
+         accept="image/*"
+         data-th-field="*{contactImage}"
+         class="hidden" />
+              <p class="text-red-500" data-th-if="${#fields.hasErrors('contactImage')}" data-th-errors="*{contactImage}">file cannot be Empty
+                </p>
+</label>
+
 
                 <!-- Image Preview -->
                 <img id="upload_image_preview" class="max-h-52 mx-auto rounded-xl shadow-lg mt-4 hidden
@@ -258,9 +272,28 @@
   </div>
   </div>
 
-  <script>
-    console.log("Add Contact page loaded successfully");
-  </script>
+<script>
+  const input = document.getElementById("image_file_input");
+  const preview = document.getElementById("upload_image_preview");
+  const uploadContent = document.getElementById("upload_content");
+
+  input.addEventListener("change", function () {
+    const file = this.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        preview.src = e.target.result;
+        preview.classList.remove("hidden");
+        uploadContent.style.display = "none"; // hide text & icon
+      };
+
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+
 
 </body>
 
