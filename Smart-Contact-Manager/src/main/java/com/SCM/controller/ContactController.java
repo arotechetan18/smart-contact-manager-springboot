@@ -1,5 +1,6 @@
 package com.SCM.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -114,5 +115,18 @@ contact.setCloudinaryImagePublicId(filename);
     return "redirect:/user/contacts/add";
 }
 
+
+@RequestMapping
+public String viewContacts(Model model,Authentication authentication){
+     String username= Helper.getEmailofLoggedinUser(authentication);
+
+    User user= userService.getUserByEmail(username);
+//load all the coanatct
+    List<Contact> contacts=contactService.getByUser(user);
+
+    model.addAttribute("contacts",contacts);
+
+    return "user/contacts";
+}
 
 }
