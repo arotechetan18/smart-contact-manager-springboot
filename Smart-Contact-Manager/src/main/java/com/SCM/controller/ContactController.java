@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.SCM.entities.Contact;
 import com.SCM.entities.User;
@@ -117,14 +119,23 @@ contact.setCloudinaryImagePublicId(filename);
 
 
 @RequestMapping
-public String viewContacts(Model model,Authentication authentication){
+public String viewContacts(
+    @RequestParam(value = "page",defaultValue = "0")int page,
+  @RequestParam(value = "size", required = false) Integer size,
+      @RequestParam(value = "sortBy",defaultValue = "name")String sortBy,
+     @RequestParam(value = "direction",defaultValue = "asc")String direction,
+    Model model,Authentication authentication){
+        if (size == null || size <= 0) {
+    size = 5;
+}
+
      String username= Helper.getEmailofLoggedinUser(authentication);
 
     User user= userService.getUserByEmail(username);
 //load all the coanatct
-    List<Contact> contacts=contactService.getByUser(user);
+    Page<Contact> pageContact=contactService.getByUser(user,page,size,sortBy,direction);
 
-    model.addAttribute("contacts",contacts);
+      model.addAttribute("pageContact", pageContact);
 
     return "user/contacts";
 }

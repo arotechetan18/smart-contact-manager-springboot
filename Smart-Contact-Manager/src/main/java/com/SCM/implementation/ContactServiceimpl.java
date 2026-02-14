@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.SCM.entities.Contact;
@@ -62,9 +66,13 @@ public List<Contact> getByUserId(String userId) {
 
 
 @Override
-public List<Contact> getByUser(User user) {
+public Page<Contact> getByUser(User user,int page ,int size,String sortBy,String direction) {
 
-return  contactrepo.findByUser(user);
+    Sort sort=direction.equals("desc")? Sort.by(sortBy).descending():Sort.by(sortBy).ascending();
+
+var pageable=PageRequest.of(page, size,sort);
+
+return  contactrepo.findByUser(user,pageable);
    
 }
 
