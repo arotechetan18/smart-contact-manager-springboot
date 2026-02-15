@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.SCM.entities.Contact;
@@ -54,11 +53,7 @@ public class ContactServiceimpl implements ContactService {
      contactrepo.delete(contact);
     }
 
-    @Override
-    public List<Contact> serch(String name, String email, String phoneNumber) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'serch'");
-    }
+ 
 @Override
 public List<Contact> getByUserId(String userId) {
    return contactrepo.findContactsByUserId(userId); 
@@ -75,6 +70,39 @@ var pageable=PageRequest.of(page, size,sort);
 return  contactrepo.findByUser(user,pageable);
    
 }
+
+
+@Override
+public Page<Contact> searchByName(String nameKeyword, int size, int page, String sortBy, String order,User user) {
+   Sort sort=order.equals("desc")? Sort.by(sortBy).descending() :Sort.by(sortBy).ascending();
+
+var pageable=PageRequest.of(page,size,sort);
+
+    return contactrepo.findByUserAndNameContaining(user,nameKeyword,pageable);
+}
+
+
+@Override
+public Page<Contact> searchByEmail(String emailKeyword, int size, int page, String sortBy, String order,User user) {
+    Sort sort=order.equals("desc")? Sort.by(sortBy).descending() :Sort.by(sortBy).ascending();
+
+var pageable=PageRequest.of(page,size,sort);
+
+   return contactrepo.findByUserAndEmailContaining(user,emailKeyword, pageable);
+
+}
+
+
+@Override
+public Page<Contact> searchByphoneNumber(String phoneNumberKeyword, int size, int page, String sortBy, String order,User user) {
+    Sort sort=order.equals("desc")? Sort.by(sortBy).descending() :Sort.by(sortBy).ascending();
+
+var pageable=PageRequest.of(page,size,sort);
+
+   return contactrepo.findByUserAndPhoneNumberContaining(user,phoneNumberKeyword, pageable);
+
+}
+
 
  
 
