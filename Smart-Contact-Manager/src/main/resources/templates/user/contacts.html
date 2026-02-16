@@ -25,51 +25,46 @@
 
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
-                    <form action="" th:object="${contactSearchForm}"
+                    <form action="" th:object="${contactSearchForm}" data-th-action="@{'/user/contacts/search'}">
+                        <div class="flex items-center gap-3 pb-4">
 
-                     data-th-action="@{'/user/contacts/search'}">
-                    <div class="flex items-center gap-3 pb-4">
-
-                        <!--     Dropdown -->
-                        <div class="w-36">
-                            <select id="searchField"
-                             data-th-field="*{field}"
-                           
-                             class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                            <!--     Dropdown -->
+                            <div class="w-36">
+                                <select id="searchField" data-th-field="*{field}" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm 
                    rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500
                    dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                <option value="" selected>Select Field</option>
-                                <option value="name">Name</option>
-                                <option value="phone">Phone</option>
-                                <option value="email">Email</option>
-                            </select>
-                        </div>
-
-                        <!-- Search Input -->
-                        <div class="relative w-64">
-                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                        d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
-                                </svg>
+                                    <option value="" selected>Select Field</option>
+                                    <option value="name">Name</option>
+                                    <option value="phone">Phone</option>
+                                    <option value="email">Email</option>
+                                </select>
                             </div>
 
-                            <input 
-                             data-th-field="*{value}"
-                             type="text" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 
+                            <!-- Search Input -->
+                            <div class="relative w-64">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                                    </svg>
+                                </div>
+
+                                <input data-th-field="*{value}" type="text" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 
                    rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500
                    dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="Search contacts">
-                        </div>
+                            </div>
 
-                        <!-- Search Button -->
-                        <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 
+                            <!-- Search Button -->
+                            <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 
                rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-400
                dark:bg-blue-500 dark:hover:bg-blue-600">
-                            Search
-                        </button>
+                                Search
+                            </button>
 
-                    </div></form>
+                        </div>
+                    </form>
 
 
 
@@ -78,7 +73,7 @@
 
                         <table class="min-w-[900px] w-full text-sm text-left text-gray-500 dark:text-gray-400">
 
-                            <!-- Table Head -->
+                           
                             <thead
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
@@ -148,9 +143,14 @@
                                     <!-- Action buttton -->
                                     <td class="px-6 py-4">
                                         <div class="flex items-center gap-4 text-lg">
-                                            <i class="fa-solid fa-trash cursor-pointer hover:text-red-600"></i>
-                                            <i class="fa-solid fa-pen cursor-pointer hover:text-blue-600"></i>
-                                            <i class="fa-solid fa-eye cursor-pointer hover:text-green-600"></i>
+                                            <a href=""> <i
+                                                    class="fa-solid fa-trash cursor-pointer hover:text-red-600"></i></a>
+                                            <a href=""> <i
+                                                    class="fa-solid fa-pen cursor-pointer hover:text-blue-600"></i></a>
+                                            <button type="button" th:onclick="loadContactdata([[${c.id}]])">
+                                                <i class="fa-solid fa-eye cursor-pointer hover:text-green-600"></i>
+                                            </button>
+
                                         </div>
                                     </td>
 
@@ -220,10 +220,14 @@
                 </div>
 
 
+
             </div>
+
+            <div data-th-replace="~{user/Contact_modal ::contact}"></div>
 
         </div>
     </div>
+    <script data-th-src="@{'/js/contact.js'}"></script>
     <script>
         console.log("this in dashboard page")
     </script>
