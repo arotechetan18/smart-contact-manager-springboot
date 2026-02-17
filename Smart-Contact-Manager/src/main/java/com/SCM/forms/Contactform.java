@@ -47,8 +47,10 @@ private String linkedInLink;
 //annotation create for file validate
 //size and resoluction
 
-   @ValidFile
+   @ValidFile(message = "invalid file")
     private MultipartFile contactImage;
+
+    private String picture;
 
 
 }

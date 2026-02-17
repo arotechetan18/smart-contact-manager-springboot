@@ -1,3 +1,5 @@
+//conatct modal
+const BaseURL="http://localhost:8081";
 document.addEventListener("DOMContentLoaded", function () {
   console.log("contact js loaded");
 
@@ -19,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.loadContactdata = async function (id) {
     try {
-      console.log("Loading ID:", id);
+      
 
       const response = await fetch(`/api/contacts/${id}`);
 
@@ -79,3 +81,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 });
+
+//delete contact
+async function deleteContact(id) {
+Swal.fire({
+  title: "Do you want to delete the Contact ?",
+  icon:"warning",
+  showCancelButton: true,
+  confirmButtonText: "Delete",
+
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire("Contact Deleted!", "", "success");
+    const url=  `${BaseURL}/user/contacts/delete/`+id;
+    window.location.replace(url);
+  } 
+});
+  
+}

@@ -22,8 +22,9 @@ public class ContactServiceimpl implements ContactService {
     private Contactrepo contactrepo;
 
   public Contact save(Contact contact) {
-    String contactId = UUID.randomUUID().toString();
-    contact.setId(contactId);
+    if(contact.getId() == null){
+        contact.setId(UUID.randomUUID().toString());
+    }
 
     return contactrepo.save(contact); 
 }

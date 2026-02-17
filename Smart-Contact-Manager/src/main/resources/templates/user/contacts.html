@@ -19,6 +19,7 @@
             <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">
                 All Your Contacts
             </h1>
+<div data-th-replace="message::messagebox"></div>
 
             <div class="contact_Container">
 
@@ -73,7 +74,7 @@
 
                         <table class="min-w-[900px] w-full text-sm text-left text-gray-500 dark:text-gray-400">
 
-                           
+
                             <thead
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
@@ -134,7 +135,7 @@
                                             </a>
 
                                             <a data-th-href="@{*{LinkdInLink}}" target="_blank">
-                                                <i class="fa-brands fa-linkedin"></i>
+                                                <i class="fa-brands fa-linkedin w-6  hover:text-blue-400"></i>
                                             </a>
 
                                         </div>
@@ -143,10 +144,17 @@
                                     <!-- Action buttton -->
                                     <td class="px-6 py-4">
                                         <div class="flex items-center gap-4 text-lg">
-                                            <a href=""> <i
-                                                    class="fa-solid fa-trash cursor-pointer hover:text-red-600"></i></a>
-                                            <a href=""> <i
-                                                    class="fa-solid fa-pen cursor-pointer hover:text-blue-600"></i></a>
+                                            <!-- deletecontact -->
+
+                                            <button th:onclick="deleteContact([[${c.id}]])"
+                                                data-th-href="@{'/user/contacts/delete/'+*{id}}"> <i
+                                                    class="fa-solid fa-trash cursor-pointer hover:text-red-600"></i></button>
+                                            <!-- updatecontact -->
+                                            <a data-th-href="@{'/user/contacts/view/'+*{id}}">
+                                                <i class="fa-solid fa-pen cursor-pointer hover:text-blue-600"></i>
+                                            </a>
+
+                                            <!-- view conatct -->
                                             <button type="button" th:onclick="loadContactdata([[${c.id}]])">
                                                 <i class="fa-solid fa-eye cursor-pointer hover:text-green-600"></i>
                                             </button>
@@ -228,6 +236,7 @@
         </div>
     </div>
     <script data-th-src="@{'/js/contact.js'}"></script>
+   
     <script>
         console.log("this in dashboard page")
     </script>
