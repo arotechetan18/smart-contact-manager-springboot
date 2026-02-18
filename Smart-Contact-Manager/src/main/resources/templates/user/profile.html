@@ -1,27 +1,94 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::script},~{::navbar})}"
->
+<html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::script},~{::navbar})}">
+
 <head>
-<title th:text="${loggedInUser.name + ' | Dashboard'}">profile page</title>
+    <title>profile page</title>
 
 
 
 </head>
+
 <body>
-<div id="content">
-    <div>
-          <!-- user is log in :sidebar -->
-  <div th:if="${loggedInUser}">
-    <div data-th-replace="~{user/sidebar::sidebar}"></div>
-  </div>
-        
-<h1>welcome to User profile</h1>
-<p>Lorem ipsum dolor sit amet consectetur adipi
-    sicing elit. Aut illo, harum minus ducimus ea nesciunt accusantium eligendi alias deserunt, excepturi libero ab aliquid voluptat
-    em architecto fugit voluptates impedit atque deleniti?</p>
-</div></div>
-<script>
-    console.log("this in profile page")
-</script>
+    <div id="content" class="p-6 min-h-screen">
+
+        <!-- Sidebar (visible only if user is logged in) -->
+        <div th:if="${loggedInUser}">
+            <div data-th-replace="~{user/sidebar::sidebar}"></div>
+        </div>
+
+        <!-- Profile Header -->
+        <div class="profile-header mt-6 mb-6">
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 font-serif"
+                style="font-family: Georgia, serif; font-weight: bold;">
+                Welcome , <span th:text="${loggedInUser.name}">User</span>!
+            </h1>
+
+
+        </div>
+
+
+<div class="profile-card bg-white dark:bg-gray-800 shadow-2xl rounded-xl p-8 w-full max-w-xl mx-auto">
+
+            <!-- Small description inside card -->
+            <p class="text-xl md:text-2xl italic font-light text-gray-600 dark:text-gray-300 mb-6 text-center">
+                Manage your profile details
+            </p>
+
+            <h2 class="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200 border-b pb-2">
+                Profile Information
+            </h2>
+<div class="mb-4 flex justify-between items-center">
+    <span class="font-light text-gray-500 flex items-center gap-2">
+        <i class="fa-solid fa-user"></i> Name  :
+    </span>
+    <span th:text="${loggedInUser.name}" class="font-semibold text-gray-900 dark:text-gray-100 text-center">John Doe</span>
+</div>
+
+<div class="mb-4 flex justify-between items-center">
+    <span class="font-light text-gray-500 flex items-center gap-2">
+        <i class="fa-solid fa-envelope"></i> Email  :
+    </span>
+    <span th:text="${loggedInUser.email}" class="font-semibold text-gray-900 dark:text-gray-100">user@example.com</span>
+</div>
+
+<div class="mb-4 flex justify-between items-center">
+    <span class="font-light text-gray-500 flex items-center gap-2">
+        <i class="fa-solid fa-phone"></i> Phone  :
+    </span>
+    <span th:text="${loggedInUser.phoneNumber != null} ? ${loggedInUser.phoneNumber} : 'Not provided'" class="font-semibold text-gray-900 dark:text-gray-100">+91 1234567890</span>
+</div>
+
+<div class="mb-4 flex justify-between items-center">
+    <span class="font-light text-gray-500 flex items-center gap-2">
+        <i class="fa-solid fa-pen"></i> About  :
+    </span>
+    <span th:text="${loggedInUser.about != null} ? ${loggedInUser.about} : 'Not provided'" class="font-semibold text-gray-900 dark:text-gray-100">About user...</span>
+</div>
+
+
+
+            <div class="mt-6 text-center">
+                <a th:href="@{/user/edit-profile}" 
+                    class="inline-block text-white bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-medium transition-all duration-300">
+                    Edit Profile
+                </a>
+            </div>
+        </div>
+
+
+        <!-- Optional Description -->
+        <div class="mt-10 max-w-3xl mx-auto text-center text-gray-700 dark:text-gray-300 text-lg">
+            <p>
+                Keep your profile up-to-date. Update your information, manage your contacts,
+                and ensure your SCM account is secure.
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        console.log("this in profile page")
+    </script>
 </body>
+
 </html>

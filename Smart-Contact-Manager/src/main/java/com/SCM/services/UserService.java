@@ -18,6 +18,7 @@ public interface UserService {
     User saveUser(User user);
    
     User getUserByEmail(String email);
+    
 
     //we can add more user-related services here as needed 
 

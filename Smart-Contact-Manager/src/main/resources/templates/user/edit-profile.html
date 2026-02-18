@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::script},~{::navbar})}">
+
+<head>
+    <title>Edit Profile</title>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+
+    <div id="content" class="sm:pl-64 pt-20 pb-10 min-h-screen flex justify-center lg:justify-start">
+
+        <div class="w-full max-w-lg sm:max-w-xl px-4 lg:ml-24">
+
+            <!-- PROFILE CARD -->
+            <div class="bg-white dark:bg-slate-800
+                    border border-gray-200 dark:border-slate-700
+                    rounded-2xl shadow-2xl
+                    p-8 sm:p-10
+                    transition-colors duration-300">
+
+                <!-- HEADER -->
+                <div class="mb-8 text-center sm:text-left">
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
+                        Edit Profile
+                    </h1>
+                    <p class="mt-2 text-gray-500 dark:text-gray-400 text-sm sm:text-base">
+                        Update your personal information below.
+                    </p>
+                </div>
+                <!-- form -->
+                <form th:action="@{/user/edit-profile}" th:object="${user}" method="post" class="space-y-6">
+
+                    <!-- name -->
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Name
+                        </label>
+                        <div class="relative">
+                            <div class="absolute left-3 top-0 h-full flex items-center pointer-events-none">
+                                <i class="fa-regular fa-user text-gray-400 dark:text-gray-500"></i>
+                            </div>
+                            <input type="text" th:field="*{name}" placeholder="Enter your name" class="w-full h-12 pl-10 pr-3 rounded-lg
+                                      bg-gray-50 dark:bg-slate-700/60
+                                      text-gray-900 dark:text-white
+                                      placeholder-gray-400 dark:placeholder-gray-400
+                                      border border-gray-300 dark:border-slate-600
+                                      focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                                      outline-none transition duration-300">
+                        </div>
+                    </div>
+
+                    <!-- phone -->
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Phone
+                        </label>
+                        <div class="relative">
+                            <div class="absolute left-3 top-0 h-full flex items-center pointer-events-none">
+                                <i class="fa-solid fa-phone text-gray-400 dark:text-gray-500"></i>
+                            </div>
+                            <input type="tel" th:field="*{phoneNumber}" placeholder="+91 XXXXXXXXXX" class="w-full h-12 pl-10 pr-3 rounded-lg
+                                      bg-gray-50 dark:bg-slate-700/60
+                                      text-gray-900 dark:text-white
+                                      placeholder-gray-400 dark:placeholder-gray-400
+                                      border border-gray-300 dark:border-slate-600
+                                      focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                                      outline-none transition duration-300">
+                        </div>
+                    </div>
+
+                  <!-- about -->
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                            About
+                        </label>
+                        <textarea th:field="*{about}" rows="4" placeholder="Write something about yourself" class="w-full p-3 rounded-lg
+                                     bg-gray-50 dark:bg-slate-700/60
+                                     text-gray-900 dark:text-white
+                                     placeholder-gray-400 dark:placeholder-gray-400
+                                     border border-gray-300 dark:border-slate-600
+                                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                                     outline-none transition duration-300 resize-none"></textarea>
+                    </div>
+
+                    <!-- update button -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                        <button type="submit" class="flex-1 py-3 rounded-lg font-semibold
+                                   bg-blue-600 hover:bg-blue-700
+                                   text-white shadow-md
+                                   transition transform hover:scale-105 active:scale-95">
+                            Update Profile
+                        </button>
+
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
