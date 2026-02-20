@@ -1,4 +1,5 @@
 {
     "editor.inlineSuggest.enabled": true,
-    "editor.inlineSuggest.edits.renderSideBySide": "auto"
+    "editor.inlineSuggest.edits.renderSideBySide": "auto",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

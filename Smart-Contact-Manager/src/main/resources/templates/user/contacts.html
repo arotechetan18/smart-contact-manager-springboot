@@ -158,6 +158,9 @@
                                             <button type="button" th:onclick="loadContactdata([[${c.id}]])">
                                                 <i class="fa-solid fa-eye cursor-pointer hover:text-green-600"></i>
                                             </button>
+                                              <a th:href="@{'/user/send-email/' + ${c.id}}">
+            <i class="fa-solid fa-envelope cursor-pointer hover:text-yellow-500"></i>
+        </a>
 
                                         </div>
                                     </td>
