@@ -295,7 +295,7 @@ public class ContactController {
         return "user/export_contacts";
     }
 
-
+   // export contacts as csv file
     @GetMapping("/export")
     public void exportContacts(HttpServletResponse response,
             Authentication authentication) throws IOException {
