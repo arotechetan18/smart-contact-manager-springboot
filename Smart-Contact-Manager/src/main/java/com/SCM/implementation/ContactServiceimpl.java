@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -102,6 +103,24 @@ var pageable=PageRequest.of(page,size,sort);
 
    return contactrepo.findByUserAndPhoneNumberContaining(user,phoneNumberKeyword, pageable);
 
+}
+
+
+@Override
+public Page<Contact> getFavouriteByUser(User user, int page, int size, String sortBy, String direction) {
+    Sort sort = direction.equals("desc") ?
+            Sort.by(sortBy).descending() :
+            Sort.by(sortBy).ascending();
+
+    Pageable pageable = PageRequest.of(page, size, sort);
+
+    return contactrepo.findByUserAndFavouriteTrue(user, pageable);
+}
+
+
+@Override
+public List<Contact> getAllByUser(User user) {
+     return contactrepo.findByUser(user);
 }
 
 

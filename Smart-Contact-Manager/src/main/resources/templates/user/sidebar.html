@@ -123,18 +123,30 @@
         </a>
       </li>
 
-      <!-- Products -->
-      <li>
-        <a href="#"
-           class="flex items-center p-2 rounded-lg
-                  text-gray-700
-                  dark:text-slate-200
-                  hover:bg-gray-200
-                  dark:hover:bg-slate-800">
-          <i class="fa-solid fa-box w-5 "></i>
-          <span class="ms-3">Products</span>
-        </a>
-      </li>
+      <!-- Favourites -->
+ <li>
+  <a th:href="@{/user/contacts/favourites}"
+     class="flex items-center p-2 rounded-lg
+            text-gray-700
+            dark:text-slate-200
+            hover:bg-gray-200
+            dark:hover:bg-slate-800 transition">
+    <i class="fa-solid fa-heart w-5 text-red-500"></i>
+    <span class="ms-3">Favourites</span>
+  </a>
+</li>
+<li>
+  <a th:href="@{/user/contacts/export-page}"
+     class="flex items-center p-2 rounded-lg
+            text-gray-700
+            dark:text-slate-200
+            hover:bg-gray-200
+            dark:hover:bg-slate-800 transition">
+  <i class="fa-solid fa-file-export w-6"></i>
+    <span class="ms-3">Export Contacts</span>
+  </a>
+</li>
+
 
       <!-- Sign In -->
  <hr class="my-4 border-gray-300 dark:border-slate-700">

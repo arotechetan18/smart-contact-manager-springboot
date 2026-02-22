@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"
+      th:replace="~{base::parent(~{::#content},~{::title},~{::script},~{::navbar})}">
+
+<head>
+    <title>Export Contacts</title>
+</head>
+
+<div id="content"
+     class="sm:pl-64 pt-20 pb-10 min-h-screen
+            bg-gray-50 dark:bg-gray-900
+            transition-colors duration-300
+            flex justify-center lg:justify-start">
+
+    <div class="w-full max-w-lg sm:max-w-xl px-4 lg:ml-24">
+
+        <!-- card -->
+        <div class="bg-white dark:bg-slate-800
+                    border border-gray-200 dark:border-slate-700
+                    rounded-2xl shadow-2xl
+                    p-8 sm:p-10
+                    transition-colors duration-300">
+
+            
+            <div class="mb-8 text-center sm:text-left">
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
+                    Export Contacts
+                </h1>
+                <p class="mt-2 text-gray-500 dark:text-gray-400 text-sm sm:text-base">
+                    Download your complete contact list securely.
+                </p>
+            </div>
+
+           <!-- description -->
+            <div class="mb-6 p-4 rounded-lg
+                        bg-gray-50 dark:bg-slate-700/60
+                        text-gray-700 dark:text-gray-300
+                        border border-gray-200 dark:border-slate-600
+                        text-sm transition-colors duration-300">
+
+                All contacts will be exported in CSV format.
+                You can open it in Excel, Google Sheets or import it anywhere.
+            </div>
+
+            <!-- button download -->
+            <div class="flex flex-col sm:flex-row gap-4 pt-6">
+
+                <a th:href="@{/user/contacts/export}"
+                   class="flex-1 py-3 rounded-lg font-semibold text-center
+                          bg-blue-600 hover:bg-blue-700
+                          text-white shadow-md
+                          transition transform hover:scale-105 active:scale-95">
+                          <i class="fa-solid fa-download w-5"></i>
+                    Download CSV
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</html>

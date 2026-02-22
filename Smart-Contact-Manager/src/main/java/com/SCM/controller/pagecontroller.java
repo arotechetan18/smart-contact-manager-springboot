@@ -49,6 +49,8 @@ public class pagecontroller {
     }
 
     
+
+    
         @RequestMapping("/services")
     public String services(){
 
@@ -119,4 +121,8 @@ public class pagecontroller {
 
         return "redirect:/register";
     }
+
+    
+
+   
 }

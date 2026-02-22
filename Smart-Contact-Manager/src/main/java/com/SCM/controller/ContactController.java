@@ -1,5 +1,8 @@
 package com.SCM.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -28,6 +31,7 @@ import com.SCM.services.ContactService;
 import com.SCM.services.ImageService;
 import com.SCM.services.UserService;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -137,7 +141,7 @@ public class ContactController {
 
         model.addAttribute("pageContact", pageContact);
         model.addAttribute("contactSearchForm", new ContactSearchForm());
-
+        model.addAttribute("isFavouritePage", false);
         return "user/contacts";
     }
 
@@ -255,6 +259,75 @@ public class ContactController {
                         .build());
 
         return "redirect:/user/contacts";
+    }
+
+    //favourite contact page
+
+    @GetMapping("/favourites")
+    public String viewFavouriteContacts(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", required = false) Integer size,
+            @RequestParam(value = "sortBy", defaultValue = "name") String sortBy,
+            @RequestParam(value = "direction", defaultValue = "asc") String direction,
+            Model model,
+            Authentication authentication) {
+
+        if (size == null || size <= 0) {
+            size = 5;
+        }
+
+        String username = Helper.getEmailofLoggedinUser(authentication);
+        User user = userService.getUserByEmail(username);
+
+        Page<Contact> pageContact = contactService.getFavouriteByUser(user, page, size, sortBy, direction);
+
+        model.addAttribute("pageContact", pageContact);
+        model.addAttribute("contactSearchForm", new ContactSearchForm());
+        model.addAttribute("title", " Favourite Contacts");
+        model.addAttribute("isFavouritePage", true);
+
+        return "user/contacts";
+    }
+
+    // export page
+    @GetMapping("/export-page")
+    public String exportPage() {
+        return "user/export_contacts";
+    }
+
+
+    @GetMapping("/export")
+    public void exportContacts(HttpServletResponse response,
+            Authentication authentication) throws IOException {
+
+        // only logged in user can export their contacts
+        String username = Helper.getEmailofLoggedinUser(authentication);
+        User user = userService.getUserByEmail(username);
+
+        // Get ALL contacts
+        List<Contact> contacts = contactService.getAllByUser(user);
+
+        // CSV response
+        response.setContentType("text/csv");
+        response.setHeader("Content-Disposition",
+                "attachment; filename=all_contacts.csv");
+
+        PrintWriter writer = response.getWriter();
+
+        // csv Header
+        writer.println("Name,Email,Phone,Favourite");
+
+        for (Contact c : contacts) {
+
+            writer.println(
+                    (c.getName() != null ? c.getName() : "") + "," +
+                            (c.getEmail() != null ? c.getEmail() : "") + "," +
+                            (c.getPhoneNumber() != null ? c.getPhoneNumber() : "") + "," +
+                            c.isFavourite());
+        }
+
+        writer.flush();
+        writer.close();
     }
 
 }

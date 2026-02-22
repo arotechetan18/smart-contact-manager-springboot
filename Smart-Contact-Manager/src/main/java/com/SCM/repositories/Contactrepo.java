@@ -24,4 +24,7 @@ List<Contact> findContactsByUserId(@Param("userId") String userId);
 Page<Contact> findByUserAndNameContaining(User user,String nameKeyword,Pageable pageable);
 Page<Contact> findByUserAndEmailContaining(User user,String emailKeyword,Pageable pageable);
 Page<Contact> findByUserAndPhoneNumberContaining(User user,String phoneNumberKeyword,Pageable pageable);
+Page<Contact> findByUserAndFavouriteTrue(User user, Pageable pageable);
+
+List<Contact> findByUser(User user);
 }

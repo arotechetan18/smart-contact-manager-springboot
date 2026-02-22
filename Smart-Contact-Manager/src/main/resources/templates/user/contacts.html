@@ -16,10 +16,10 @@
                 <div data-th-replace="~{user/sidebar::sidebar}"></div>
             </div>
 
-            <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">
-                All Your Contacts
-            </h1>
-<div data-th-replace="message::messagebox"></div>
+         <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">
+    <span th:text="${isFavouritePage} ? 'Favourite Contacts' : 'All Your Contacts'"></span>
+</h1>
+            <div data-th-replace="message::messagebox"></div>
 
             <div class="contact_Container">
 
@@ -75,13 +75,14 @@
                         <table class="min-w-[900px] w-full text-sm text-left text-gray-500 dark:text-gray-400">
 
 
-                            <thead
-                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <thead class="text-lg  bg-gray-200 text-gray-800 
+                              dark:bg-gray-800 dark:text-white 
+                                sticky top-0 z-10 shadow-md">
                                 <tr>
-                                    <th class="px-6 py-3">Name</th>
-                                    <th class="px-6 py-3">Phone</th>
-                                    <th class="px-6 py-3">Links</th>
-                                    <th class="px-6 py-3">Action</th>
+                                    <th class="px-8 py-3 font-bold">Name</th>
+                                    <th class="px-8 py-3 font-bold">Phone</th>
+                                    <th class="px-8 py-3 font-bold">Links</th>
+                                    <th class="px-8 py-3 font-bold">Action</th>
                                 </tr>
                             </thead>
 
@@ -158,9 +159,10 @@
                                             <button type="button" th:onclick="loadContactdata([[${c.id}]])">
                                                 <i class="fa-solid fa-eye cursor-pointer hover:text-green-600"></i>
                                             </button>
-                                              <a th:href="@{'/user/send-email/' + ${c.id}}">
-            <i class="fa-solid fa-envelope cursor-pointer hover:text-yellow-500"></i>
-        </a>
+                                            <a th:href="@{'/user/send-email/' + ${c.id}}">
+                                                <i
+                                                    class="fa-solid fa-envelope cursor-pointer hover:text-yellow-500"></i>
+                                            </a>
 
                                         </div>
                                     </td>
@@ -181,8 +183,10 @@
 
                                 <!-- Previous -->
                                 <li data-th-unless="${pageContact.first}">
-                                    <a data-th-href="@{'/user/contacts?page=' + ${pageContact.number-1} + '&size=' + ${pageContact.size}}"
-                                        class="px-4 h-10 flex items-center justify-center
+                                    <a data-th-href="@{${isFavouritePage} ?
+                             '/user/contacts/favourites?page=' + ${pageContact.number-1} + '&size=' + ${pageContact.size}
+                     :
+                         '/user/contacts?page=' + ${pageContact.number-1} + '&size=' + ${pageContact.size}}" class="px-4 h-10 flex items-center justify-center
                           text-gray-500 bg-white border border-gray-300
                           rounded-l-lg hover:bg-gray-100 hover:text-gray-700
                           dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400
@@ -194,8 +198,10 @@
                                 <!-- Page Numbers -->
                                 <li data-th-each="index : ${#numbers.sequence(0,pageContact.totalPages-1)}">
 
-                                    <a data-th-href="@{'/user/contacts?page=' + ${index} + '&size=' + ${pageContact.size}}"
-                                        data-th-class="${index == pageContact.number} ?
+                                    <a data-th-href="@{${isFavouritePage} ?
+                         '/user/contacts/favourites?page=' + ${index} + '&size=' + ${pageContact.size}
+                                  :
+                        '/user/contacts?page=' + ${index} + '&size=' + ${pageContact.size}}" data-th-class="${index == pageContact.number} ?
                    'px-4 h-10 flex items-center justify-center border border-gray-300
                     text-blue-600 bg-blue-200 font-semibold
                    dark:bg-blue-800 dark:text-black dark:border-blue-500' :
@@ -213,8 +219,10 @@
 
                                 <!-- Next -->
                                 <li data-th-unless="${pageContact.last}">
-                                    <a data-th-href="@{'/user/contacts?page=' + ${pageContact.number+1} + '&size=' + ${pageContact.size}}"
-                                        class="px-4 h-10 flex items-center justify-center
+                                    <a data-th-href="@{${isFavouritePage} ?
+                       '/user/contacts/favourites?page=' + ${pageContact.number+1} + '&size=' + ${pageContact.size}
+                                     :
+                        '/user/contacts?page=' + ${pageContact.number+1} + '&size=' + ${pageContact.size}}" class="px-4 h-10 flex items-center justify-center
                           text-gray-500 bg-white border border-gray-300
                           rounded-r-lg hover:bg-gray-100 hover:text-gray-700
                           dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400
@@ -239,7 +247,7 @@
         </div>
     </div>
     <script data-th-src="@{'/js/contact.js'}"></script>
-   
+
     <script>
         console.log("this in dashboard page")
     </script>
