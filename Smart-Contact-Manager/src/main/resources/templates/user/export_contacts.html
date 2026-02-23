@@ -3,19 +3,14 @@
       th:replace="~{base::parent(~{::#content},~{::title},~{::script},~{::navbar})}">
 
 <head>
-    <title>Export Contacts</title>
+    <title>Export contacts</title>
 </head>
 
-<div id="content"
-     class="sm:pl-64 pt-20 pb-10 min-h-screen
-            bg-gray-50 dark:bg-gray-900
-            transition-colors duration-300
-            flex justify-center lg:justify-start">
+<body>
 
-    <div class="w-full max-w-lg sm:max-w-xl px-4 lg:ml-24">
-
-             <!-- card -->
-        <div class="bg-white dark:bg-slate-800
+<div id="content" class="min-h-screen w-full flex items-start justify-center pt-16 pb-10">
+<div class="w-full max-w-3xl mx-auto">
+ <div class="bg-white dark:bg-slate-800
                     border border-gray-200 dark:border-slate-700
                     rounded-2xl shadow-2xl
                     p-8 sm:p-10
@@ -32,7 +27,7 @@
             </div>
 
            <!-- description -->
-            <div class="mb-6 p-4 rounded-lg
+            <div class="mb-6 p-6 rounded-lg
                         bg-gray-50 dark:bg-slate-700/60
                         text-gray-700 dark:text-gray-300
                         border border-gray-200 dark:border-slate-600
@@ -61,4 +56,9 @@
     </div>
 </div>
 
+<script>
+    console.log("this is about page");
+</script>
+
+</body>
 </html>

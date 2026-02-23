@@ -38,28 +38,28 @@
                 Profile Information
             </h2>
 <div class="mb-4 flex justify-between items-center">
-    <span class="font-light text-gray-500 flex items-center gap-2">
+    <span class="font-semibold text-gray-500 flex items-center gap-2">
         <i class="fa-solid fa-user"></i> Name  :
     </span>
     <span th:text="${loggedInUser.name}" class="font-semibold text-gray-900 dark:text-gray-100 text-center">John Doe</span>
 </div>
 
 <div class="mb-4 flex justify-between items-center">
-    <span class="font-light text-gray-500 flex items-center gap-2">
+    <span class="font-semibold text-gray-500 flex items-center gap-2">
         <i class="fa-solid fa-envelope"></i> Email  :
     </span>
     <span th:text="${loggedInUser.email}" class="font-semibold text-gray-900 dark:text-gray-100">user@example.com</span>
 </div>
 
 <div class="mb-4 flex justify-between items-center">
-    <span class="font-light text-gray-500 flex items-center gap-2">
+    <span class="font-semibold text-gray-500 flex items-center gap-2">
         <i class="fa-solid fa-phone"></i> Phone  :
     </span>
     <span th:text="${loggedInUser.phoneNumber != null} ? ${loggedInUser.phoneNumber} : 'Not provided'" class="font-semibold text-gray-900 dark:text-gray-100">+91 1234567890</span>
 </div>
 
 <div class="mb-4 flex justify-between items-center">
-    <span class="font-light text-gray-500 flex items-center gap-2">
+    <span class="font-semibold text-gray-500 flex items-center gap-2">
         <i class="fa-solid fa-pen"></i> About  :
     </span>
     <span th:text="${loggedInUser.about != null} ? ${loggedInUser.about} : 'Not provided'" class="font-semibold text-gray-900 dark:text-gray-100">About user...</span>

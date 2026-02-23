@@ -57,11 +57,6 @@ public class pagecontroller {
         return "services";
     }
 
-      @RequestMapping("/contact")
-    public String contact(){
-        
-        return "contact";
-    }
 
     // do process user registration
 

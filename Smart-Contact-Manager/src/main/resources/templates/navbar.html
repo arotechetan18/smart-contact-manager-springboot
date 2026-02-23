@@ -30,8 +30,15 @@
       <div class="flex items-center gap-3">
 
         <!-- Theme Button -->
-      <button id="theme_change_button" class="bg-gray-400 px-4 py-2 rounded me-3 ">
-  <i class="fa-solid fa-circle-half-stroke"></i> <span>Light</span>
+    <button id="theme_change_button"
+        class="flex items-center gap-2 px-4 py-2 rounded-lg
+               bg-gray-200 dark:bg-gray-700
+               text-gray-900 dark:text-white
+               transition duration-300">
+
+    <i class="fa-solid fa-circle-half-stroke"></i>
+
+    <span>Light</span>
 </button>
 
         <a th:href="@{/login}"
