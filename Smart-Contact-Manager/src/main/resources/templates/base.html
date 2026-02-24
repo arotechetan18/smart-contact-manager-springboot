@@ -37,7 +37,7 @@
 
 <!-- PAGE CONTENT -->
 <div
-  class="pt-20 p-5 min-h-screen bg-white dark:bg-gray-900 transition-all duration-300"
+  class="pt-20 p-5 min-h-screen bg-gray-100 dark:bg-gray-900 transition-all duration-300"
   th:classappend="${loggedInUser} ? ' sm:ml-64' : ''"
 >
   <section th:replace="${content}"></section>
@@ -48,9 +48,7 @@
 
   <!-- comman footer -->
 
-  <footer>
-    footer:learn with chetan and code with chetan
-  </footer>
+  
 
   <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
   <script data-th-src="@{'/js/script.js'}">
