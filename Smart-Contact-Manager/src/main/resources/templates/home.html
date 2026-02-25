@@ -1,19 +1,193 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::script},~{::navbar})}"
->
+<html lang="en" 
+      th:replace="~{base::parent(~{::#content},~{::title},~{::script},~{::navbar})}">
 <head>
-  <title>home page</title> 
-
+    <title>Smart Contact Manager | Home</title>
 </head>
+
 <body>
+
 <div id="content">
-<h1>welcome to home page</h1>
-<p>Lorem ipsum dolor sit amet consectetur adipi
-    sicing elit. Aut illo, harum minus ducimus ea nesciunt accusantium eligendi alias deserunt, excepturi libero ab aliquid voluptat
-    em architecto fugit voluptates impedit atque deleniti?</p>
-</div >
+
+<div class="min-h-screen">
+
+    <!-- HERO SECTION -->
+    <section class="relative py-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+
+<h1 class="text-4xl md:text-6xl font-extrabold 
+           text-slate-900 dark:text-white 
+           leading-tight tracking-tight mb-6">
+    Organize Your Contacts
+    <span class="block text-blue-600 text-lg font-semibold dark:text-blue-400 mt-2">
+      Built for Professionals Who Value Efficiency
+    </span>
+</h1>
+            <p class="max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400 mb-10 py-6">
+                Smart Contact Manager helps you securely store, manage, and organize
+                all your contacts with a modern cloud-powered system.
+            </p>
+<div class="flex flex-col sm:flex-row justify-center gap-6 mt-12">
+             <a th:href="@{'/signup'}"
+   class="px-8 py-3 
+          bg-blue-600 text-white 
+          rounded-xl font-semibold
+          shadow-lg shadow-blue-500/30
+          hover:shadow-blue-500/60
+          hover:scale-105
+          transition-all duration-300">
+    🚀 Get Started Free
+</a>
+<a th:href="@{'/login'}"
+   class="px-8 py-3 
+          bg-transparent
+          text-slate-900 dark:text-white
+          border-2 border-slate-400 dark:border-slate-600
+          rounded-xl font-semibold
+          hover:bg-slate-900 hover:text-white
+          dark:hover:bg-white dark:hover:text-slate-900
+          transition-all duration-300
+          hover:scale-105">
+<i class="fa-solid fa-lock-open"></i> Login
+</a>
+            </div>
+
+        </div>
+    </section>
+
+
+ 
+
+
+    <!-- FEATURES SECTION -->
+<!-- FEATURES SECTION -->
+<section class="max-w-7xl mx-auto px-6 py-20">
+    
+    <!-- Section Heading -->
+    <div class="text-center mb-14">
+        <h2 class="text-3xl md:text-4xl font-bold text text-slate-900 dark:text-blue-500">
+            Powerful Features
+        </h2>
+        <p class="text--600 dark:text-slate-400 mt-3 py-5">
+            Everything you need to manage your contacts efficiently.
+        </p>
+    </div>
+
+<div class="grid md:grid-cols-3 gap-12 md:gap-16">
+
+        <!-- CARD 1 -->
+        <div class="bg-white dark:bg-slate-800 
+                    p-8 rounded-2xl 
+                    border border-blue-500 dark:border-slate-700
+                    shadow-lg hover:shadow-2xl
+                    hover:-translate-y-3
+                    transition-all duration-300">
+
+            <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/40 
+                        text-blue-600 rounded-full 
+                        flex items-center justify-center mb-6">
+                <i class="fa-solid fa-lock text-lg"></i>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">
+                Advanced Security
+            </h3>
+
+            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                Built with Spring Security and encrypted authentication 
+                to keep your contact data fully protected.
+            </p>
+        </div>
+
+
+        <!-- CARD 2 -->
+        <div class="bg-white dark:bg-slate-800 
+                    p-8 rounded-2xl 
+                    border border-slate-200 dark:border-slate-700
+                    shadow-lg hover:shadow-2xl
+                    hover:-translate-y-3
+                    transition-all duration-300 ">
+
+            <div class="w-14 h-14 bg-indigo-100 dark:bg-indigo-900/40 
+                        text-indigo-600 rounded-full 
+                        flex items-center justify-center mb-6">
+                <i class="fa-solid fa-cloud text-gray-700"></i>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">
+                Cloud Storage
+            </h3>
+
+            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                Access your contacts anytime, anywhere with powerful 
+                cloud-based architecture.
+            </p>
+        </div>
+
+
+        <!-- CARD 3 -->
+        <div class="bg-white dark:bg-slate-800 
+                    p-8 rounded-2xl 
+                    border border-slate-200 dark:border-slate-700
+                    shadow-lg hover:shadow-2xl
+                    hover:-translate-y-3
+                    transition-all duration-300 gap-3">
+
+            <div class="w-14 h-14 bg-indigo-100 dark:bg-yellow-900/40 
+                        text-yellow-600 rounded-full 
+                        flex items-center justify-center mb-6">
+                <i class="fa-solid fa-bolt text-gray-500"></i>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">
+                Smart Management
+            </h3>
+
+            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                Add, edit, delete, and search contacts instantly with 
+                an optimized and user-friendly interface.
+            </p>
+        </div>
+
+    </div>
+</section>
+       <!-- STATS SECTION -->
+    <section class="max-w-6xl mx-auto px-6 py-10">
+        <div class="grid md:grid-cols-3 gap-6 text-center">
+
+            <div class="p-6 bg-blue-600 dark:bg-gray-800 rounded-2xl shadow-lg">
+                <h2 class="text-3xl font-bold text-white">10K+</h2>
+                <p class="text-white dark:text-white mt-2">Active Users</p>
+            </div>
+
+            <div class="p-6 bg-blue-600 dark:bg-slate-800 rounded-2xl shadow-lg">
+                 <h2 class="text-3xl font-bold text-white">99.9%</h2>
+                <p class="text-white dark:text-slate-400 mt-2">Data Security</p>
+            </div>
+
+            <div class="p-6 bg-blue-600 dark:bg-slate-800 rounded-2xl shadow-lg">
+                <h2 class="text-3xl font-bold text-white">Fast</h2>
+                <p class="text-white dark:text-white mt-2">Cloud Performance</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="py-10 border-t border-slate-200 dark:border-slate-800 text-center bg-white/60 dark:bg-slate-900/60 backdrop-blur-md">
+        <p class="text-slate-500 dark:text-slate-400 text-sm">
+            Built with ❤ using Spring Boot & Tailwind CSS <br/>
+            © 2026 Smart Contact Manager
+        </p>
+    </footer>
+
+</div>
+</div>
+
 <script>
-    console.log("this in home page")
+    console.log("Professional Product Style Home Loaded");
 </script>
+
 </body>
 </html>
