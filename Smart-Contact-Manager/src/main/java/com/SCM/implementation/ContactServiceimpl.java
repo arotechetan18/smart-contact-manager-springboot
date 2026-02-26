@@ -123,6 +123,20 @@ public List<Contact> getAllByUser(User user) {
      return contactrepo.findByUser(user);
 }
 
+@Override
+public long countByUser(User user) {
+    return contactrepo.countByUser(user);
+}
+
+@Override
+public long countFavouriteByUser(User user) {
+    return contactrepo.countByUserAndFavouriteTrue(user);
+}
+
+@Override
+public List<Contact> getRecentContacts(User user) {
+    return contactrepo.findTop5ByUserOrderByIdDesc(user);
+}
 
  
 

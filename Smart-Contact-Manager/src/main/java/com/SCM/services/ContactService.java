@@ -41,4 +41,10 @@ public interface ContactService {
     Page<Contact> getFavouriteByUser(User user, int page, int size, String sortBy, String direction);
 
     List<Contact> getAllByUser(User user);
+
+    long countByUser(User user);
+
+long countFavouriteByUser(User user);
+
+List<Contact> getRecentContacts(User user);
 }

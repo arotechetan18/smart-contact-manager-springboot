@@ -1,30 +1,170 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::script},~{::navbar})}"
->
+<html lang="en"
+th:replace="~{base::parent(~{::#content},~{::title},~{::script},~{::navbar})}">
+
 <head>
-<title th:text="${loggedInUser.name + ' | Dashboard'}">profile page</title>
-
-
-
+<title th:text="${loggedInUser.name + ' | Dashboard'}">Dashboard</title>
 </head>
+
 <body>
-<div id="content">
-    <div>
-          <!-- user is log in :sidebar -->
-  <div th:if="${loggedInUser}">
-    <div data-th-replace="~{user/sidebar::sidebar}"></div>
-  </div>
-        
-<h1>welcome to dashboard</h1>
-<p>Lorem ipsum dolor sit amet consectetur adipi
-    sicing elit. Aut illo, harum minus ducimus ea nesciunt accusantium eligendi alias deserunt, excepturi libero ab aliquid voluptat
-    em architecto fugit voluptates impedit atque deleniti?</p>
-     <a data-th-href="@{'/do-logout'}">logout</a>
-</div></div>
+
+<div id="content"
+class="sm:pl-50 pt-20 min-h-screen
+ dark:bg-gray-950
+transition-all duration-300">
+
+<!-- Sidebar -->
+<div th:if="${loggedInUser}">
+<div data-th-replace="~{user/sidebar::sidebar}"></div>
+</div>
+
+<div class="p-6">
+
+<!-- Heading -->
+<h1 class="text-3xl font-bold
+text-gray-800 dark:text-gray-100
+mb-8">
+Welcome back,
+<span class="text-blue-600 dark:text-blue-400"
+th:text="${loggedInUser.name}"></span> 👋
+</h1>
+
+
+<!-- Stats Section -->
+<div class="grid md:grid-cols-3 gap-6 mb-10">
+
+<!-- Total Contacts Card -->
+<div class="rounded-2xl p-6
+bg-white dark:bg-gray-900
+border border-gray-200 dark:border-gray-800
+shadow-sm hover:shadow-xl
+transition-all duration-300">
+
+<p class="text-sm text-gray-500 dark:text-gray-400">
+Total Contacts
+</p>
+
+<h2 class="text-3xl font-bold
+text-gray-800 dark:text-white
+mt-2"
+th:text="${totalContacts}">
+0
+</h2>
+
+</div>
+
+<!-- Favourite Contacts Card -->
+<div class="rounded-2xl p-6
+bg-white dark:bg-gray-900
+border border-gray-200 dark:border-gray-800
+shadow-sm hover:shadow-xl
+transition-all duration-300">
+
+<p class="text-sm text-gray-500 dark:text-gray-400">
+Favourite Contacts
+</p>
+
+<h2 class="text-3xl font-bold
+text-pink-600 dark:text-pink-400
+mt-2"
+th:text="${favouriteContacts}">
+0
+</h2>
+
+</div>
+
+<!-- Quick Action Card -->
+  <div class="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl shadow-lg p-6 text-white">
+                <h2 class="text-lg">Quick Action</h2>
+
+
+
+<a th:href="@{/user/contacts/add}"
+class="inline-block mt-4
+bg-white text-blue-700
+dark:bg-gray-100 dark:text-blue-700
+px-5 py-2 rounded-lg
+font-semibold
+hover:scale-105 transition">
++ Add Contact
+</a>
+
+</div>
+
+</div>
+
+<!-- Recent Contacts Section -->
+<div class="rounded-2xl
+bg-white dark:bg-gray-900
+border border-gray-200 dark:border-gray-800
+shadow-sm p-6">
+
+<h2 class="text-xl font-semibold
+text-gray-800 dark:text-gray-100
+mb-6">
+Recent Contacts
+</h2>
+
+<div class="overflow-x-auto">
+
+<table class="w-full text-left text-sm">
+
+<thead>
+<tr class="border-b
+border-gray-200 dark:border-gray-800
+text-gray-600 dark:text-gray-400">
+
+<th class="py-3">Name</th>
+<th>Email</th>
+<th>Phone</th>
+
+</tr>
+</thead>
+
+<tbody>
+
+<tr th:each="c : ${recentContacts}"
+class="border-b
+border-gray-200 dark:border-gray-800
+hover:bg-slate-200 dark:hover:bg-gray-800
+transition">
+
+<td class="py-3 font-medium
+text-gray-800 dark:text-gray-200"
+th:text="${c.name}"></td>
+
+<td class="text-gray-600 dark:text-gray-400"
+th:text="${c.email}"></td>
+
+<td class="text-gray-600 dark:text-gray-400"
+th:text="${c.phoneNumber}"></td>
+
+</tr>
+
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<!-- Logout Button -->
+<div class="mt-10">
+<a th:href="@{/do-logout}"
+class="px-5 py-2 rounded-lg
+bg-red-500 hover:bg-red-600
+text-white font-semibold
+transition">
+Logout
+</a>
+</div>
+
+</div>
+</div>
+
 <script>
-    console.log("this in dashboard page")
+console.log("Dashboard Loaded Successfully");
 </script>
+
 </body>
 </html>
-    
-   

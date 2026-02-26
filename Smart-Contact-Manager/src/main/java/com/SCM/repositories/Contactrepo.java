@@ -27,4 +27,10 @@ Page<Contact> findByUserAndPhoneNumberContaining(User user,String phoneNumberKey
 Page<Contact> findByUserAndFavouriteTrue(User user, Pageable pageable);
 
 List<Contact> findByUser(User user);
+
+long countByUser(User user);
+
+long countByUserAndFavouriteTrue(User user);
+
+List<Contact> findTop5ByUserOrderByIdDesc(User user);
 }
