@@ -53,17 +53,17 @@ public class ContactController {
     private Page<Contact> searchByName;
 
     // add contact page
-@RequestMapping("/add")
-public String addContactView(Model model, Authentication authentication) {
+    @RequestMapping("/add")
+    public String addContactView(Model model, Authentication authentication) {
 
-    String username = Helper.getEmailofLoggedinUser(authentication);
-    User user = userService.getUserByEmail(username);
+        String username = Helper.getEmailofLoggedinUser(authentication);
+        User user = userService.getUserByEmail(username);
 
-    model.addAttribute("loggedInUser", user);
-    model.addAttribute("contactForm", new Contactform());
+        model.addAttribute("loggedInUser", user);
+        model.addAttribute("contactForm", new Contactform());
 
-    return "user/add_contact";
-}
+        return "user/add_contact";
+    }
 
     @PostMapping("/add")
 
@@ -86,8 +86,8 @@ public String addContactView(Model model, Authentication authentication) {
                     .type(MessageType.red)
                     .build());
 
-                    System.out.println("ADD CONTACT METHOD CALLED");
-                    System.out.println("FORM DATA: " + contactForm);
+            System.out.println("ADD CONTACT METHOD CALLED");
+            System.out.println("FORM DATA: " + contactForm);
 
             return "user/add_contact";
         }
@@ -100,14 +100,14 @@ public String addContactView(Model model, Authentication authentication) {
         // to upload
         String fileURL = null;
 
-if(contactForm.getContactImage() != null &&
-   !contactForm.getContactImage().isEmpty()) {
+        if (contactForm.getContactImage() != null &&
+                !contactForm.getContactImage().isEmpty()) {
 
-    fileURL = imageService.uploadImage(contactForm.getContactImage(), filename);
-}
+            fileURL = imageService.uploadImage(contactForm.getContactImage(), filename);
+        }
 
         Contact contact = new Contact();
-        contact.setId(UUID.randomUUID().toString());  
+        contact.setId(UUID.randomUUID().toString());
         contact.setName(contactForm.getName());
         contact.setFavourite(contactForm.isFavourite());
         contact.setEmail(contactForm.getEmail());
@@ -118,9 +118,9 @@ if(contactForm.getContactImage() != null &&
         contact.setWebsiteLink(contactForm.getWebsiteLink());
         contact.setLinkedInLink(contactForm.getLinkedInLink());
         contact.setPicture(fileURL);
-   if(fileURL != null) {
-    contact.setCloudinaryImagePublicId(filename);
-}
+        if (fileURL != null) {
+            contact.setCloudinaryImagePublicId(filename);
+        }
 
         contactService.save(contact);
 
@@ -159,47 +159,47 @@ if(contactForm.getContactImage() != null &&
         return "user/contacts";
     }
 
-    // serch handler
+    // serching contact
 
-    @RequestMapping("/search")
-    public String searchHandler(
-            @ModelAttribute ContactSearchForm contactSearchForm,
-            @RequestParam(value = "size", defaultValue = AppConstant.PAGE_SIZE + "") int size,
-            @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "sortBy", defaultValue = "name") String sortBy,
-            @RequestParam(value = "direction", defaultValue = "asc") String direction,
-            Model model,
-            Authentication authentication) {
-        if (contactSearchForm.getField() == null ||
-                contactSearchForm.getField().isEmpty()) {
-            return "redirect:/user/contacts";
-        }
+ @RequestMapping("/search")
+public String searchHandler(
+        @ModelAttribute ContactSearchForm contactSearchForm,
+        @RequestParam(value = "size", defaultValue = AppConstant.PAGE_SIZE + "") int size,
+        @RequestParam(value = "page", defaultValue = "0") int page,
+        @RequestParam(value = "sortBy", defaultValue = "name") String sortBy,
+        @RequestParam(value = "direction", defaultValue = "asc") String direction,
+        Model model,
+        Authentication authentication) {
 
-        logger.info("field{} keyword {}", contactSearchForm.getField(), contactSearchForm.getValue());
-
-        var user = userService.getUserByEmail(Helper.getEmailofLoggedinUser(authentication));
-
-        Page<Contact> pageContact = null;
-        if (contactSearchForm.getField().equalsIgnoreCase("name")) {
-            pageContact = contactService.searchByName(contactSearchForm.getValue(), size, page, sortBy, direction,
-                    user);
-        } else if (contactSearchForm.getField().equalsIgnoreCase("email")) {
-            pageContact = contactService.searchByEmail(contactSearchForm.getValue(), size, page, sortBy, direction,
-                    user);
-        } else if (contactSearchForm.getField().equalsIgnoreCase("phone")) {
-            pageContact = contactService.searchByphoneNumber(contactSearchForm.getValue(), size, page, sortBy,
-                    direction, user);
-        }
-        logger.info("pageContact {}", pageContact);
-        model.addAttribute("contactSearchForm", contactSearchForm);
-
-        model.addAttribute("pageContact", pageContact);
-        model.addAttribute("pagesize", AppConstant.PAGE_SIZE);
-        return "user/search";
-
+    if (contactSearchForm.getField() == null ||
+            contactSearchForm.getField().isEmpty()) {
+        return "redirect:/user/contacts";
     }
 
-    // delete conatct
+    var user = userService.getUserByEmail(
+            Helper.getEmailofLoggedinUser(authentication));
+
+    Page<Contact> pageContact = null;
+
+    if (contactSearchForm.getField().equalsIgnoreCase("name")) {
+        pageContact = contactService.searchByName(
+                contactSearchForm.getValue(), size, page, sortBy, direction, user);
+    } 
+    else if (contactSearchForm.getField().equalsIgnoreCase("email")) {
+        pageContact = contactService.searchByEmail(
+                contactSearchForm.getValue(), size, page, sortBy, direction, user);
+    } 
+    else if (contactSearchForm.getField().equalsIgnoreCase("phone")) {
+        pageContact = contactService.searchByphoneNumber(
+                contactSearchForm.getValue(), size, page, sortBy, direction, user);
+    }
+
+    model.addAttribute("contactSearchForm", contactSearchForm);
+    model.addAttribute("pageContact", pageContact);
+    model.addAttribute("isFavouritePage", false);
+
+    return "user/contacts"; 
+}
     @RequestMapping("/delete/{contactId}")
     public String deletContact(@PathVariable("contactId") String contactId) {
 
@@ -275,7 +275,7 @@ if(contactForm.getContactImage() != null &&
         return "redirect:/user/contacts";
     }
 
-    //favourite contact page
+    // favourite contact page
 
     @GetMapping("/favourites")
     public String viewFavouriteContacts(
@@ -309,7 +309,7 @@ if(contactForm.getContactImage() != null &&
         return "user/export_contacts";
     }
 
-   // export contacts as csv file
+    // export contacts as csv file
     @GetMapping("/export")
     public void exportContacts(HttpServletResponse response,
             Authentication authentication) throws IOException {
