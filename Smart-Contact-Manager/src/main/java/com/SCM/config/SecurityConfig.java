@@ -24,17 +24,6 @@ public class SecurityConfig {
     @Autowired
     private oAuthAuthenticationSuccessHandler oAuthAuthenticationSuccessHandler;
 
-//     @Bean
-//     public UserDetailsService userDetailsService(){
-
-//    UserDetails user=   User.withUsername("chetan").password("{noop}chetan123") // {noop} indicates that no encoding is use
-//    .roles("ADMIN","USER")
-//    .build();
-  
-//         var inMemoryUserDetailsManager= new InMemoryUserDetailsManager(user);
-
-//         return inMemoryUserDetailsManager;
-//     }
 
 //configure authentication provider daoauthenticationprovider by spring security
 
@@ -56,6 +45,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
         .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> {
             auth.requestMatchers("/login", "/authenticate").permitAll();
+            
             auth.requestMatchers("/user/**").authenticated();
             auth.anyRequest().permitAll();
         })
@@ -63,7 +53,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
             form.loginPage("/login");
             form.loginProcessingUrl("/authenticate");
             form.defaultSuccessUrl("/user/dashboard", true);
-          form.defaultSuccessUrl("/user/profile", true);
+         
 
             // form.failureUrl("/login?error=true");
             form.usernameParameter("email");

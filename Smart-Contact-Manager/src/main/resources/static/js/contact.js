@@ -60,11 +60,10 @@ document.addEventListener("DOMContentLoaded", function () {
           ? data.websiteLink
           : "#";
 
-     
-      document.getElementById("Contact_Linkedin").href =
-        data.linkdInLink && data.linkdInLink.trim() !== ""
-          ? data.linkdInLink
-          : "#";
+   document.getElementById("Contact_Linkedin").href =
+  data.linkedInLink && data.linkedInLink.trim() !== ""
+    ? data.linkedInLink
+    : "#";
 
     
       const fav = document.getElementById("Contact_Favourite");

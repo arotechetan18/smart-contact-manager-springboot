@@ -1,9 +1,10 @@
 package com.SCM.controller;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,27 +22,29 @@ public class UserDashboardController {
 
     @Autowired
     private ContactService contactService;
+@GetMapping("/user/dashboard")
+public String userDashboard(Model model, Authentication authentication) {
 
-    @GetMapping("/user/dashboard")
-    public String userDashboard(Model model, Principal principal) {
+    Object principal = authentication.getPrincipal();
+    String email = null;
 
-        String email = principal.getName();
-        User user = userService.getUserByEmail(email);
-
-        // total contacts
-        long totalContacts = contactService.countByUser(user);
-
-        // favourite contacts
-        long favouriteContacts = contactService.countFavouriteByUser(user);
-
-        // recent 5 contacts
-        List<Contact> recentContacts = contactService.getRecentContacts(user);
-
-        model.addAttribute("loggedInUser", user);
-        model.addAttribute("totalContacts", totalContacts);
-        model.addAttribute("favouriteContacts", favouriteContacts);
-        model.addAttribute("recentContacts", recentContacts);
-
-        return "user/dashboard";
+    if (principal instanceof OAuth2User oauthUser) {
+        email = oauthUser.getAttribute("email");
+    } else if (principal instanceof org.springframework.security.core.userdetails.User userDetails) {
+        email = userDetails.getUsername();
     }
+
+    User user = userService.getUserByEmail(email);
+
+    long totalContacts = contactService.countByUser(user);
+    long favouriteContacts = contactService.countFavouriteByUser(user);
+    List<Contact> recentContacts = contactService.getRecentContacts(user);
+
+    model.addAttribute("loggedInUser", user);
+    model.addAttribute("totalContacts", totalContacts);
+    model.addAttribute("favouriteContacts", favouriteContacts);
+    model.addAttribute("recentContacts", recentContacts);
+
+    return "user/dashboard";
+}
 }

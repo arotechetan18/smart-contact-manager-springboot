@@ -35,14 +35,14 @@
             <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
               Add New Contact
             </h1>
-            <div th-replace="message::messagebox"></div>
+            <div th:replace="~{message::messagebox}"></div>
             <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
               This contact will be stored on cloud, you can directly email this client from SCM.
             </p>
           </div>
 
           <!-- FORM -->
-          <form class="space-y-5" th-action="@{/user/contacts/add}" th-object="${contactForm}" method="POST"
+          <form class="space-y-5" th-action="@{/user/contacts/add}" data-th-object="${contactForm}" method="POST"
             enctype="multipart/form-data">
 
 
@@ -59,7 +59,7 @@
                     <i class="fa-regular fa-user text-gray-400 dark:text-gray-500"></i>
                   </div>
 
-                  <input type="text" th-field="*{name}" placeholder="Enter full name" class="w-full h-11 pl-10 pr-3 rounded-lg
+                  <input type="text" data-th-field="*{name}" placeholder="Enter full name" class="w-full h-11 pl-10 pr-3 rounded-lg
                   bg-gray-50 dark:bg-slate-700/60
                   text-gray-900 dark:text-white
                   border border-gray-300 dark:border-slate-600
@@ -85,7 +85,7 @@
                   <i class="fa-regular fa-envelope text-gray-400 dark:text-gray-500"></i>
                 </div>
 
-                <input type="email" th-field="*{email}" placeholder="example@gmail.com" class="w-full h-11 pl-10 pr-3 rounded-lg
+                <input type="email" data-th-field="*{email}" placeholder="example@gmail.com" class="w-full h-11 pl-10 pr-3 rounded-lg
                   bg-gray-50 dark:bg-slate-700/60
                   text-gray-900 dark:text-white
                   border border-gray-300 dark:border-slate-600
@@ -108,7 +108,7 @@
                   <i class="fa-solid fa-phone text-gray-400 dark:text-gray-500"></i>
                 </div>
 
-                <input type="tel" th-field="*{phoneNumber}" placeholder="+91 XXXXXXXXXX" class="w-full h-11 pl-10 pr-3 rounded-lg
+                <input type="tel" data-th-field="*{phoneNumber}" placeholder="+91 XXXXXXXXXX" class="w-full h-11 pl-10 pr-3 rounded-lg
                   bg-gray-50 dark:bg-slate-700/60
                   text-gray-900 dark:text-white
                   border border-gray-300 dark:border-slate-600
@@ -126,15 +126,14 @@
               <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
                 Contact Address
               </label>
-              <textarea rows="3" th-field="*{address}" placeholder="Enter contact address" class="w-full rounded-lg p-3
+              <textarea rows="3" data-th-field="*{address}" placeholder="Enter contact address" class="w-full rounded-lg p-3
                                          bg-gray-50 dark:bg-slate-700/60
                                          text-gray-900 dark:text-white
                                          placeholder-gray-400 dark:placeholder-gray-500
                                          border border-gray-300 dark:border-slate-600
                                          focus:ring-2 focus:ring-blue-500 focus:border-blue-500
                                          outline-none transition"></textarea>
-              <p class="text-red-500" th-if="${#fields.hasErrors('address')}" th-errors="*{address}">Address
-                is Required***</p>
+              <p class="text-red-500" th-if="${#fields.hasErrors('address')}" th-errors="*{address}"></p>
             </div>
             <!-- CONTACT DESCRIPTION -->
             <div>
@@ -142,7 +141,7 @@
                 Contact Description
               </label>
 
-              <textarea rows="4" th-field="*{description}" placeholder="Write something about this contact..."
+              <textarea rows="4" data-th-field="*{description}" placeholder="Write something about this contact..."
                 class="w-full rounded-lg p-3
            bg-gray-50 dark:bg-slate-700/60
            text-gray-900 dark:text-white
@@ -161,7 +160,7 @@
                   <i class="fa-brands fa-linkedin text-gray-400 dark:text-gray-500"></i>
                 </div>
 
-                <input type="text" th-field="*{linkedInLink}" placeholder="LinkedIn Profile" class="w-full h-10 pl-10 pr-3 rounded-lg
+                <input type="text" data-th-field="*{linkedInLink}" placeholder="LinkedIn Profile" class="w-full h-10 pl-10 pr-3 rounded-lg
                   bg-gray-50 dark:bg-slate-700/60
                   border border-gray-300 dark:border-slate-600
                   text-gray-900 dark:text-white">
@@ -173,7 +172,7 @@
                   <i class="fa-solid fa-globe text-gray-400 dark:text-gray-500"></i>
                 </div>
 
-                <input type="text" th-field="*{websiteLink}" placeholder="Website" class="w-full h-10 pl-10 pr-3 rounded-lg
+                <input type="text" data-th-field="*{websiteLink}" placeholder="Website" class="w-full h-10 pl-10 pr-3 rounded-lg
                   bg-gray-50 dark:bg-slate-700/60
                   border border-gray-300 dark:border-slate-600
                   text-gray-900 dark:text-white">
@@ -221,7 +220,7 @@
                   <img id="upload_image_preview" class="absolute inset-0 w-full h-full object-cover hidden"
                     alt="Preview" />
 
-                  <input id="image_file_input" type="file" accept="image/*" th-field="*{contactImage}"
+                  <input id="image_file_input" type="file" accept="image/*" data-th-field="*{contactImage}"
                     class="hidden" />
                   <p class="text-red-500" th-if="${#fields.hasErrors('contactImage')}"
                     th-errors="*{contactImage}">file cannot be Empty
@@ -236,7 +235,7 @@
 
               <!-- checkbox -->
               <div class="flex items-center space-x-3 px-1 py-2">
-                <input type="checkbox" id="favorite" th-field="*{favourite}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded 
+                <input type="checkbox" id="favorite" data-th-field="*{favourite}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded 
                focus:ring-blue-500 dark:focus:ring-blue-600 
                dark:ring-offset-gray-800 focus:ring-2 
                dark:bg-gray-700 dark:border-gray-600 cursor-pointer">
@@ -251,10 +250,7 @@
 
 
 
-
-        </div>
-        <!-- BUTTONS -->
-        <div class="flex flex-col sm:flex-row gap-3 pt-4">
+   <div class="flex flex-col sm:flex-row gap-3 pt-4">
           <button type="submit" class="flex-1 py-2.5 rounded-lg font-semibold
                                        bg-blue-600 hover:bg-blue-700
                                        text-white transition active:scale-95">
@@ -269,6 +265,9 @@
             Clear Form
           </button>
         </div>
+        </div>
+        <!-- BUTTONS -->
+     
 
         </form>
       </div>

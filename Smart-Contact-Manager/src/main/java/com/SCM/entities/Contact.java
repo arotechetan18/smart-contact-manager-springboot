@@ -3,14 +3,14 @@ package com.SCM.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -29,6 +29,7 @@ import lombok.Setter;
 @Table(name = "contacts")
 public class Contact {
   @Id
+
   private String id;
 
   private String name;
@@ -39,15 +40,14 @@ public class Contact {
   @Column(length = 500)
   private String description;
   private boolean favourite = false;
-  private String WebsiteLink;
-  private String LinkdInLink;
+private String websiteLink;
+private String linkedInLink;
+private String cloudinaryImagePublicId;
 
-  private String CloudinaryImagePublicId;
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id")
-  @JsonIgnore
-  private User user;
+@ManyToOne(fetch = FetchType.EAGER)
+@JoinColumn(name = "user_id")
+@JsonIgnore
+private User user;
 
 
 

@@ -104,14 +104,29 @@ public class UserServiceImpl implements UserService {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'saveUser'");
     }
+@Override
+public User getUserByEmail(String email) {
 
-    @Override
-    public User getUserByEmail(String email) {
+    Optional<User> optionalUser = userRepo.findByEmail(email);
 
-        return userRepo.findByEmail(email).orElseThrow(()->new ResourceNotFoundException("user not found"));
-
+    if (optionalUser.isPresent()) {
+        return optionalUser.get();
     }
 
+    // If user not found, create new OAuth user
+    User newUser = new User();
+    newUser.setUserid(UUID.randomUUID().toString());
+    newUser.setEmail(email);
+    newUser.setName(email); // or extract proper name
+    newUser.setPassword(passwordEncoder.encode("default123"));
+    newUser.setRoleList(List.of(AppConstant.ROLE_USER));
+    newUser.setEnabled(true);
+    newUser.setEmailVerified(true);
+
+    logger.info("New OAuth user created: " + email);
+
+    return userRepo.save(newUser);
+}
     
 
 }

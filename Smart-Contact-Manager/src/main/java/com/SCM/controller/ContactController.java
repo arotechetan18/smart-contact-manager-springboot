@@ -53,15 +53,17 @@ public class ContactController {
     private Page<Contact> searchByName;
 
     // add contact page
-    @RequestMapping("/add")
-    public String addContactView(Model model) {
+@RequestMapping("/add")
+public String addContactView(Model model, Authentication authentication) {
 
-        Contactform contactForm = new Contactform();
+    String username = Helper.getEmailofLoggedinUser(authentication);
+    User user = userService.getUserByEmail(username);
 
-        model.addAttribute("contactForm", contactForm);
+    model.addAttribute("loggedInUser", user);
+    model.addAttribute("contactForm", new Contactform());
 
-        return "user/add_contact";
-    }
+    return "user/add_contact";
+}
 
     @PostMapping("/add")
 
@@ -84,6 +86,9 @@ public class ContactController {
                     .type(MessageType.red)
                     .build());
 
+                    System.out.println("ADD CONTACT METHOD CALLED");
+                    System.out.println("FORM DATA: " + contactForm);
+
             return "user/add_contact";
         }
 
@@ -93,9 +98,16 @@ public class ContactController {
 
         // image processing
         // to upload
-        String fileURL = imageService.uploadImage(contactForm.getContactImage(), filename);
+        String fileURL = null;
+
+if(contactForm.getContactImage() != null &&
+   !contactForm.getContactImage().isEmpty()) {
+
+    fileURL = imageService.uploadImage(contactForm.getContactImage(), filename);
+}
 
         Contact contact = new Contact();
+        contact.setId(UUID.randomUUID().toString());  
         contact.setName(contactForm.getName());
         contact.setFavourite(contactForm.isFavourite());
         contact.setEmail(contactForm.getEmail());
@@ -104,9 +116,11 @@ public class ContactController {
         contact.setDescription(contactForm.getDescription());
         contact.setUser(user);
         contact.setWebsiteLink(contactForm.getWebsiteLink());
-        contact.setLinkdInLink(contactForm.getLinkedInLink());
+        contact.setLinkedInLink(contactForm.getLinkedInLink());
         contact.setPicture(fileURL);
-        contact.setCloudinaryImagePublicId(filename);
+   if(fileURL != null) {
+    contact.setCloudinaryImagePublicId(filename);
+}
 
         contactService.save(contact);
 
@@ -207,7 +221,7 @@ public class ContactController {
         contactform.setDescription(contact.getDescription());
         contactform.setFavourite(contact.isFavourite());
         contactform.setWebsiteLink(contact.getWebsiteLink());
-        contactform.setLinkedInLink(contact.getLinkdInLink());
+        contactform.setLinkedInLink(contact.getLinkedInLink());
         contactform.setPicture(contact.getPicture());
 
         model.addAttribute("contactForm", contactform);
@@ -237,7 +251,7 @@ public class ContactController {
         existingContact.setDescription(contactForm.getDescription());
         existingContact.setFavourite(contactForm.isFavourite());
         existingContact.setWebsiteLink(contactForm.getWebsiteLink());
-        existingContact.setLinkdInLink(contactForm.getLinkedInLink());
+        existingContact.setLinkedInLink(contactForm.getLinkedInLink());
 
         // image update
         if (contactForm.getContactImage() != null &&
@@ -329,7 +343,4 @@ public class ContactController {
         writer.flush();
         writer.close();
     }
-
-    
-
 }

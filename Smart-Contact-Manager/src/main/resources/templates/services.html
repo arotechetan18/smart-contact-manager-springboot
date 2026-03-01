@@ -1,18 +1,108 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base::parent(~{::#content},~{::title},~{::script},~{::navbar})}"
->
+<html lang="en"
+      th:replace="~{base::parent(~{::#content},~{::title},~{::script},~{::navbar})}">
+
 <head>
-  
-<title>services by chetan</title>
+    <title>Services | Smart Contact Manager</title>
 </head>
+
 <body>
-    <section id="content">
-        <h1>services by scm</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, magni!</p>
-    </section>
- 
-    <script>
-        console.log("servicess is added")
-    </script>
+
+<section id="content" >
+
+    <!-- Heading -->
+    <div class="text-center mb-12">
+        <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+            Our Services
+        </h1>
+        <p class="block text-blue-600 text-lg font-semibold dark:text-blue-400 mt-2 py-3">
+            Smart Contact Manager provides powerful tools to manage, organize,
+            and secure your contacts with ease and efficiency.
+        </p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+        <!-- Service 1 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300">
+            <div class="text-4xl mb-4"><i class="fa-solid fa-code-fork"></i></div>
+            <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
+                Contact Management
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+                Add, update, and delete contacts with complete details including
+                email, phone number, address, and profile image.
+            </p>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300">
+            <div class="text-4xl mb-4"><i class="fa-brands fa-searchengin"></i></div>
+            <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
+                Smart Search
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+                Quickly find contacts using advanced search and filtering options
+                for faster access and productivity.
+            </p>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300">
+            <div class="text-4xl mb-4"><i class="fa-solid fa-envelope-circle-check"></i></div>
+            <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
+                Email Integration
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+                Send emails directly from the dashboard without switching between
+                different applications.
+            </p>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300">
+            <div class="text-4xl mb-4"><i class="fa-solid fa-lock"></i></div>
+            <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
+                Secure Authentication
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+                Secure login and registration system to ensure your contact data
+                remains private and protected.
+            </p>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300">
+            <div class="text-4xl mb-4"><i class="fa-solid fa-circle-half-stroke"></i></div>
+            <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
+                Light & Dark Mode
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+                Seamlessly switch between light and dark themes for a comfortable
+                and modern user experience.
+            </p>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300">
+            <div class="text-4xl mb-4"><i class="fa-solid fa-cloud"></i></div>
+            <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-3">
+                Cloud Access
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+                Access your contacts anytime, anywhere with reliable cloud-based
+                storage and fast performance.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+    console.log("Services page loaded successfully");
+</script>
+
 </body>
 </html>

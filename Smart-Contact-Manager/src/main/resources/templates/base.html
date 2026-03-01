@@ -14,8 +14,7 @@
   <link rel="stylesheet" data-th-href="@{/css/style.css}">
 </head>
 
-<body class="bg-slate-200 dark:bg-slate-900 text-black dark:text-white transition-colors duration-300">
-
+<body class="text-black dark:text-white transition-colors duration-300">
   <!-- user is logged in :navabar -->
   <div th:if="${loggedInUser}">
     <div data-th-replace="~{user/user_navbar::user-navbar}"></div>
@@ -37,10 +36,19 @@
 
 <!-- PAGE CONTENT -->
 <div
-  class="pt-20 p-5 min-h-screen bg-gradient-to-br from-slate-100 via-white to-blue-500 dark:from-slate-950 dark:via-slate-850 dark:to-slate-950 transition-all duration-300"
+  class="pt-20 p-5 min-h-screen
+  bg-gradient-to-br 
+  from-slate-50 via-blue-500 to-blue-700
+  bg-[length:200%_200%] animate-gradient
+
+  dark:bg-[#0b1120]
+  
+  dark:animate-none
+
+  transition-all duration-500 ease-in-out"
   th:classappend="${loggedInUser} ? ' sm:ml-64' : ''"
 >
-  <section th:replace="${content}"></section>
+  <div th:replace="${content}"></div>
 </div>
 
 
@@ -48,7 +56,7 @@
 
   <!-- comman footer -->
 
-  
+
 
   <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
   <script data-th-src="@{'/js/script.js'}">
@@ -59,5 +67,3 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <th:block data-th-replace="${script}"></th:block>
 </body>
-
-</html>
