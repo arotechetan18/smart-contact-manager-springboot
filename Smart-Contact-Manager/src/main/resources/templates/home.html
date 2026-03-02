@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" 
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       th:replace="~{base::parent(~{::#content},~{::title},~{::script},~{::navbar})}">
 <head>
     <title>Smart Contact Manager | Home</title>
@@ -27,30 +28,42 @@
                 Smart Contact Manager helps you securely store, manage, and organize
                 all your contacts with a modern cloud-powered system.
             </p>
-<div class="flex flex-col sm:flex-row justify-center gap-6 mt-12">
-             <a th:href="@{'/signup'}"
-   class="px-8 py-3 
-          bg-blue-600 text-white 
-          rounded-xl font-semibold
-          shadow-lg shadow-blue-500/30
-          hover:shadow-blue-500/60
-          hover:scale-105
-          transition-all duration-300">
-    🚀 Get Started Free
-</a>
-<a th:href="@{'/login'}"
-   class="px-8 py-3 
-          bg-transparent
-          text-slate-900 dark:text-white
-          border-2 border-slate-400 dark:border-slate-600
-          rounded-xl font-semibold
-          hover:bg-slate-900 hover:text-white
-          dark:hover:bg-white dark:hover:text-slate-900
-          transition-all duration-300
-          hover:scale-105">
-<i class="fa-solid fa-lock-open"></i> Login
-</a>
-            </div>
+<div class="flex flex-col sm:flex-row justify-center gap-6 mt-12"
+     sec:authorize="isAnonymous()">
+
+    <a th:href="@{'/signup'}"
+       class="px-8 py-3 bg-blue-600 text-white rounded-xl font-semibold
+              shadow-lg shadow-blue-500/30 hover:shadow-blue-500/60
+              hover:scale-105 transition-all duration-300">
+        🚀 Get Started Free
+    </a>
+
+    <a th:href="@{'/login'}"
+       class="px-8 py-3 bg-transparent text-slate-900 dark:text-white
+              border-2 border-slate-400 dark:border-slate-600
+              rounded-xl font-semibold hover:bg-slate-900 hover:text-white
+              dark:hover:bg-white dark:hover:text-slate-900
+              transition-all duration-300 hover:scale-105">
+        <i class="fa-solid fa-lock-open"></i> Login
+    </a>
+
+    
+</div>
+<div class="flex justify-center mt-12"
+     sec:authorize="isAuthenticated()">
+
+    <a th:href="@{'/user/dashboard'}"
+       class="px-8 py-3 
+              bg-blue-600 text-white rounded-xl font-semibold
+              shadow-lg shadow-blue-500/30 hover:shadow-blue-500/60
+              hover:scale-105 transition-all duration-300">
+        
+       <i class="fa-solid fa-chart-line"></i>
+        Go To Dashboard
+
+    </a>
+
+</div>
 
         </div>
     </section>
@@ -103,7 +116,7 @@
         <!-- CARD 2 -->
         <div class="bg-white dark:bg-slate-800 
                     p-8 rounded-2xl 
-                    border border-slate-200 dark:border-slate-700
+                    border  border-blue-500 dark:border-slate-700
                     shadow-lg hover:shadow-2xl
                     hover:-translate-y-3
                     transition-all duration-300 ">
@@ -128,7 +141,7 @@
         <!-- CARD 3 -->
         <div class="bg-white dark:bg-slate-800 
                     p-8 rounded-2xl 
-                    border border-slate-200 dark:border-slate-700
+                    border  border-blue-500 dark:border-slate-700
                     shadow-lg hover:shadow-2xl
                     hover:-translate-y-3
                     transition-all duration-300 gap-3">

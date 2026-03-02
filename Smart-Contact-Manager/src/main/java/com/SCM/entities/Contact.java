@@ -40,17 +40,14 @@ public class Contact {
   @Column(length = 500)
   private String description;
   private boolean favourite = false;
-private String websiteLink;
-private String linkedInLink;
-private String cloudinaryImagePublicId;
+  private String websiteLink;
+  private String linkedInLink;
+  private String cloudinaryImagePublicId;
 
-@ManyToOne(fetch = FetchType.EAGER)
-@JoinColumn(name = "user_id")
-@JsonIgnore
-private User user;
-
-
-
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "user_id")
+  @JsonIgnore
+  private User user;
 
   @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
   private List<Socialink> links = new ArrayList<>();

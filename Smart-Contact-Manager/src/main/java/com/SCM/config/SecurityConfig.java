@@ -52,7 +52,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
         .formLogin(form -> {
             form.loginPage("/login");
             form.loginProcessingUrl("/authenticate");
-            form.defaultSuccessUrl("/user/dashboard", true);
+         form.defaultSuccessUrl("/home", true);
          
 
             // form.failureUrl("/login?error=true");

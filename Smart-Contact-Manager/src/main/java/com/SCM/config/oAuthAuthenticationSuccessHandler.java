@@ -104,7 +104,7 @@ if (user1 == null) {
 
 
 new DefaultRedirectStrategy()
-        .sendRedirect(request, response, "/user/dashboard");
+      .sendRedirect(request, response, "/home");
 
 
 
