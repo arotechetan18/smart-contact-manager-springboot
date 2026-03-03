@@ -21,6 +21,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+//contact entity
 @Entity
 @Getter
 @Setter
@@ -44,6 +45,7 @@ public class Contact {
   private String linkedInLink;
   private String cloudinaryImagePublicId;
 
+  // Many contacts to one user
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "user_id")
   @JsonIgnore

@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.CascadeType;
 
-
+///user entity
 @Entity(name = "user")
 @Table(name = "users")
 @NoArgsConstructor
@@ -67,7 +67,7 @@ public class User  implements UserDetails{
     private String provideUserId;
 
 
-
+//one user have many contacts
 @OneToMany(
  mappedBy = "user",
     cascade = CascadeType.ALL,
@@ -77,20 +77,21 @@ public class User  implements UserDetails{
 
 
 
+// Stores user roles (ROLE_USER, ROLE_ADMIN)
   @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roleList = new ArrayList<>();
 
+    // Converts roles into Spring Security authorities
 @Override
 public Collection<? extends GrantedAuthority> getAuthorities() {
-   // list of roles[USER,ADMIN]
-        // Collection of SimpGrantedAuthority[roles{ADMIN,USER}]
+ 
         Collection<SimpleGrantedAuthority> roles = roleList.stream().map(role -> new SimpleGrantedAuthority(role))
                 .collect(Collectors.toList());
         return roles;
 }
 
 
-
+// Returns email as username
 @Override
 public String getUsername() {
    return this.email;

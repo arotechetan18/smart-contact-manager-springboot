@@ -14,6 +14,7 @@ import com.SCM.entities.User;
 import com.SCM.services.ContactService;
 import com.SCM.services.UserService;
 
+//user dashboard controlller
 @Controller
 public class UserDashboardController {
 
@@ -25,6 +26,7 @@ public class UserDashboardController {
 @GetMapping("/user/dashboard")
 public String userDashboard(Model model, Authentication authentication) {
 
+    // Get logged-in principal object oauth or normal user
     Object principal = authentication.getPrincipal();
     String email = null;
 

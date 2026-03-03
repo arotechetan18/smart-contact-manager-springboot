@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+///socialink entity to store social media links of contacts
 @Getter
 @Setter
 @NoArgsConstructor

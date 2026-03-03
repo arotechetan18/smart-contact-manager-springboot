@@ -3,6 +3,7 @@ package com.SCM.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+//contact message entity
 @Entity
 @Getter
 @Setter

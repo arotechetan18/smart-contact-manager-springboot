@@ -14,80 +14,87 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.SCM.implementation.SecurityCustomUserDetailService;
 
+// Main Spring Security configuration class for authentication and authorization
 @Configuration
 public class SecurityConfig {
 
     @Autowired
     private SecurityCustomUserDetailService userDetailService;
-    //use create and login using java code in memory service 
+    // Custom UserDetailsService implementation to load user from database
 
     @Autowired
     private oAuthAuthenticationSuccessHandler oAuthAuthenticationSuccessHandler;
+    // Handles custom logic after successful OAuth2 login
 
+    // configure authentication provider daoauthenticationprovider by spring
+    // security
 
-//configure authentication provider daoauthenticationprovider by spring security
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        // Create DAO authentication provider
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        // user detailservice object
+        daoAuthenticationProvider.setUserDetailsService(userDetailService);
 
-@Bean
-public AuthenticationProvider authenticationProvider() {
+        // Set password encoder
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        return daoAuthenticationProvider;
+    }
 
-     DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-     //user detailservice object
-     daoAuthenticationProvider.setUserDetailsService(userDetailService);    
-     daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-    return daoAuthenticationProvider;
-}
+    // Configure HTTP security rules and login/logout settings
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
+        // Allow login and authentication URLs without login
+        http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> {
+                    auth.requestMatchers("/login", "/authenticate").permitAll();
+                    // for user-related URLs
+                    auth.requestMatchers("/user/**").authenticated();
+                    auth.anyRequest().permitAll();
+                })
 
-@Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                // Configure custom form login
+                .formLogin(form -> {
+                    form.loginPage("/login");
+                    form.loginProcessingUrl("/authenticate");
 
-    http
-        .csrf(csrf -> csrf.disable())
-        .authorizeHttpRequests(auth -> {
-            auth.requestMatchers("/login", "/authenticate").permitAll();
-            
-            auth.requestMatchers("/user/**").authenticated();
-            auth.anyRequest().permitAll();
-        })
-        .formLogin(form -> {
-            form.loginPage("/login");
-            form.loginProcessingUrl("/authenticate");
-         form.defaultSuccessUrl("/home", true);
-         
+                    // Redirect after successful login
+                    form.defaultSuccessUrl("/home", true);
 
-            // form.failureUrl("/login?error=true");
-            form.usernameParameter("email");
-            form.passwordParameter("password");
+                    // form.failureUrl("/login?error=true");
+                    form.usernameParameter("email");
+                    form.passwordParameter("password");
+                });
+        // logout
+
+        http.logout(logoutform -> {
+            logoutform.logoutUrl("/do-logout");
+
+            // Redirect after logout
+            logoutform.logoutSuccessUrl("/login?logout=true");
+
         });
 
+        // Configure OAuth2 login (Google, github.)
+        http.oauth2Login(oauth2 -> {
+            oauth2.loginPage("/login");
+            oauth2.successHandler(oAuthAuthenticationSuccessHandler);
+        });
 
-  http.logout(logoutform -> {
-      logoutform.logoutUrl("/do-logout");
-      logoutform.logoutSuccessUrl("/login?logout=true");
-  
-  });
-http.oauth2Login(oauth2 -> {
-    oauth2.loginPage("/login");
-    oauth2.successHandler(oAuthAuthenticationSuccessHandler);
-});
+        return http.build();
+    }
 
+    //  AuthenticationManager bean
+    @Bean
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
+    }
 
-    return http.build();
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
-
-@Bean
-public AuthenticationManager authenticationManager(
-        AuthenticationConfiguration configuration) throws Exception {
-    return configuration.getAuthenticationManager();
-}
-
-
-@Bean
-public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-}
-}
-
-
-
-

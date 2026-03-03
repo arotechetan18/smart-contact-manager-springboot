@@ -34,7 +34,8 @@ import com.SCM.services.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-
+  
+//  Main controller to manage user contacts (CRUD, Search, Favourite, Export)
 @Controller
 @RequestMapping("/user/contacts")
 public class ContactController {
@@ -52,25 +53,25 @@ public class ContactController {
 
     private Page<Contact> searchByName;
 
-    // add contact page
+    // add contact page for log in user
     @RequestMapping("/add")
     public String addContactView(Model model, Authentication authentication) {
 
         String username = Helper.getEmailofLoggedinUser(authentication);
         User user = userService.getUserByEmail(username);
-
+// Send empty contact form to view
         model.addAttribute("loggedInUser", user);
         model.addAttribute("contactForm", new Contactform());
 
         return "user/add_contact";
     }
 
+    // Handle Add Contact form submission and save contact
     @PostMapping("/add")
-
     public String saveContact(@Valid @ModelAttribute("contactForm") Contactform contactForm, BindingResult result,
             Authentication authentication, HttpSession session, Model model) {
 
-        // process the form data
+      
         String filename = UUID.randomUUID().toString();
 
         String username = Helper.getEmailofLoggedinUser(authentication);
@@ -106,6 +107,7 @@ public class ContactController {
             fileURL = imageService.uploadImage(contactForm.getContactImage(), filename);
         }
 
+        // Convert Contactform object to Contact entity
         Contact contact = new Contact();
         contact.setId(UUID.randomUUID().toString());
         contact.setName(contactForm.getName());
@@ -121,7 +123,7 @@ public class ContactController {
         if (fileURL != null) {
             contact.setCloudinaryImagePublicId(filename);
         }
-
+//save
         contactService.save(contact);
 
         System.out.println(contactForm);
@@ -136,6 +138,7 @@ public class ContactController {
         return "redirect:/user/contacts/add";
     }
 
+    // Display paginated contact list 
     @RequestMapping
     public String viewContacts(
             @RequestParam(value = "page", defaultValue = "0") int page,
@@ -200,6 +203,8 @@ public String searchHandler(
 
     return "user/contacts"; 
 }
+
+// Delete contact by ID
     @RequestMapping("/delete/{contactId}")
     public String deletContact(@PathVariable("contactId") String contactId) {
 

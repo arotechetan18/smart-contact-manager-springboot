@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+//messages
 @Builder
 @Setter
 @Getter
@@ -15,6 +16,7 @@ import lombok.Setter;
 
 public class message {
 
+    //msg content and type
 
     private String content;
     @Builder.Default

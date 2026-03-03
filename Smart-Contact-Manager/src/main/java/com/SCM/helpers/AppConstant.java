@@ -1,5 +1,6 @@
 package com.SCM.helpers;
 
+//app connst for constant value
 public class AppConstant {
 
     public static final String APP_NAME="Smart Contact Manager"; 

@@ -22,15 +22,17 @@ import com.SCM.repositories.Userepo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+// Handles OAuth2 login success and auto-registers user in database
 @Component
 public class oAuthAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
   Logger logger = LoggerFactory.getLogger(AuthenticationSuccessHandler.class);
+  // Logger for debugging OAuth authentication flow
 
   @Autowired
   private Userepo userepo;
-
+   
+  // Executed after successful OAuth login (Google/GitHub)
   @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
@@ -50,6 +52,7 @@ String authclientregistrationid =
 
 logger.info(authclientregistrationid);
 
+// Create new User object with default values
 User user =new User();
 user.setUserid(UUID.randomUUID().toString());
 user.setRoleList(List.of(AppConstant.ROLE_USER));
@@ -92,17 +95,19 @@ user.setAbout("This account is created using google");
 }
 
 
-
+// Check if user already exists in database by email
  User user1 = userepo.findByEmail(user.getEmail()).orElse(null);
-
+//jevha navin user kivva email asel tevhach
 if (user1 == null) {
     userepo.save(user);
-    logger.info("NEW USER CREATED: {}", user.getEmail());
+    logger.info("new user created: {}", user.getEmail());
 } else {
-    logger.info("USER ALREADY EXISTS: {}", user1.getEmail());
+    logger.info("user already exists: {}", user1.getEmail());
 }
 
 
+
+// Redirect user to home page after successful login
 new DefaultRedirectStrategy()
       .sendRedirect(request, response, "/home");
 

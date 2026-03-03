@@ -3,6 +3,7 @@ package com.SCM.helpers;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 
+// Utility class to extract logged-in user's email for handle outh login and local log in
 public class Helper {
 
     public static String getEmailofLoggedinUser(Authentication authentication) {

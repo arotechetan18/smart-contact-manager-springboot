@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+// DTO class used to get and validate Contact form data from UI
 @Getter
 @Setter
 @AllArgsConstructor
@@ -45,7 +46,7 @@ private String websiteLink;
 
 private String linkedInLink;
 
-//annotation create for file validate
+//file validate
 //size and resoluction
 
    @ValidFile(message = "invalid file")

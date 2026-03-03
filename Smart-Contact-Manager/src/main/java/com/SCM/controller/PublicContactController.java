@@ -8,13 +8,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.SCM.entities.ContactMessage;
 import com.SCM.repositories.ContactMessageRepository;
 
+// Controller to handle public Contact Us form requests
 @Controller
 @RequestMapping("/contact")
 public class PublicContactController {
 
     @Autowired
     private ContactMessageRepository contactRepo;
-    
+    //contact us page 
         @GetMapping
     public String contactPage() {
         return "contact";
@@ -35,7 +36,7 @@ public class PublicContactController {
 
         ContactMessage msg = new ContactMessage();
         
-
+   // Set form values into entity
         msg.setName(name);
         msg.setEmail(email);
         msg.setSubject(subject);

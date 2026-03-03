@@ -10,12 +10,14 @@ import com.SCM.services.EmailService;
 @Service
 public class EmailserviceImpl implements EmailService {
 
+        // Spring's mail sender dependency
     @Autowired
     private JavaMailSender mailSender;
 
     @Override
     public void sendEmail(String to, String subject, String message) {
 
+        //email msg object
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo(to);
         mail.setSubject(subject);

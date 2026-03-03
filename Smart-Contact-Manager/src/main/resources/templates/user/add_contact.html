@@ -41,7 +41,7 @@
             </p>
           </div>
 
-          <!-- FORM -->
+          <!-- add contact form -->
           <form class="space-y-5" th:action="@{/user/contacts/add}" th:object="${contactForm}" method="POST"
             enctype="multipart/form-data">
 
@@ -97,7 +97,7 @@
             </div>
 
 
-            <!-- PHONE -->
+            <!-- phone -->
             <div>
               <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
                 Contact Phone
@@ -121,7 +121,7 @@
             </div>
 
 
-            <!-- ADDRESS -->
+            <!-- address -->
             <div>
               <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
                 Contact Address
@@ -136,7 +136,7 @@
               <p class="text-red-500 text-sm mt-1" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">
               </p>
             </div>
-            <!-- CONTACT DESCRIPTION -->
+            <!-- contact description -->
             <div>
               <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
                 Contact Description
@@ -269,7 +269,7 @@
               </button>
             </div>
         </div>
-        <!-- BUTTONS -->
+      
 
 
         </form>

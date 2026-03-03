@@ -35,16 +35,22 @@ public interface ContactService {
       //get conatct by user id
       List<Contact>getByUserId(String userId);
 
+      //get conatct by user id with pagination and sorting
 
       Page<Contact>getByUser(User user,int page ,int size,String sortField,String sortDirection);
 
+      //get fav user by pagination
     Page<Contact> getFavouriteByUser(User user, int page, int size, String sortBy, String direction);
 
+    //get all contact 
     List<Contact> getAllByUser(User user);
 
+    //count total 
     long countByUser(User user);
 
+    //countvfav  contact
 long countFavouriteByUser(User user);
 
+//get recent contact in dashboard
 List<Contact> getRecentContacts(User user);
 }

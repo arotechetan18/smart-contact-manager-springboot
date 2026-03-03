@@ -9,14 +9,18 @@ import java.lang.annotation.Target;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
+// Custom annotation to validate uploaded files using FileValidator
 @Documented
-@Target({ElementType.FIELD,ElementType.METHOD,ElementType.ANNOTATION_TYPE,ElementType.PARAMETER})
+@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.ANNOTATION_TYPE, ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy =FileValidator.class)
+@Constraint(validatedBy = FileValidator.class)
 public @interface ValidFile {
 
+    // Default validation error message
     String message() default "invalid file";
-    Class<?>[]groups() default{};
-    Class<? extends Payload>[]payload() default {};
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 
 }

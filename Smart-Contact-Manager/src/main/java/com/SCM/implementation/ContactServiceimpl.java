@@ -22,6 +22,7 @@ public class ContactServiceimpl implements ContactService {
      @Autowired
     private Contactrepo contactrepo;
 
+     // Save new contact
   public Contact save(Contact contact) {
     if(contact.getId() == null){
         contact.setId(UUID.randomUUID().toString());
@@ -30,13 +31,14 @@ public class ContactServiceimpl implements ContactService {
     return contactrepo.save(contact); 
 }
 
-
+// Update existing contact
     @Override
     public Contact update(Contact contact) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
+    // get all contacts
     @Override
     public List<Contact> getAll() {
      return contactrepo.findAll();
@@ -48,6 +50,8 @@ public class ContactServiceimpl implements ContactService {
         return contactrepo.findById(id).orElseThrow(()->new ResourceNotFoundException("contact not found with id"+id));
     }
 
+
+    // Delete contact by ID
     @Override
     public void delete(String id) {
      var contact=  contactrepo.findById(id).orElseThrow(()->new ResourceNotFoundException("contact not found with id"+id));
@@ -62,6 +66,7 @@ public List<Contact> getByUserId(String userId) {
 }
 
 
+//pagination contact
 @Override
 public Page<Contact> getByUser(User user,int page ,int size,String sortBy,String direction) {
 
@@ -73,6 +78,7 @@ return  contactrepo.findByUser(user,pageable);
    
 }
 
+//serch contact by name 
 
 @Override
 public Page<Contact> searchByName(String nameKeyword, int size, int page, String sortBy, String order,User user) {
@@ -83,6 +89,7 @@ var pageable=PageRequest.of(page,size,sort);
     return contactrepo.findByUserAndNameContaining(user,nameKeyword,pageable);
 }
 
+//serch contact by email
 
 @Override
 public Page<Contact> searchByEmail(String emailKeyword, int size, int page, String sortBy, String order,User user) {
@@ -94,7 +101,7 @@ var pageable=PageRequest.of(page,size,sort);
 
 }
 
-
+//serch contact by phoneno
 @Override
 public Page<Contact> searchByphoneNumber(String phoneNumberKeyword, int size, int page, String sortBy, String order,User user) {
     Sort sort=order.equals("desc")? Sort.by(sortBy).descending() :Sort.by(sortBy).ascending();
@@ -105,6 +112,7 @@ var pageable=PageRequest.of(page,size,sort);
 
 }
 
+//get fav contact
 
 @Override
 public Page<Contact> getFavouriteByUser(User user, int page, int size, String sortBy, String direction) {
@@ -118,21 +126,25 @@ public Page<Contact> getFavouriteByUser(User user, int page, int size, String so
 }
 
 
+
 @Override
 public List<Contact> getAllByUser(User user) {
      return contactrepo.findByUser(user);
 }
 
+    // Count total contacts of user
 @Override
 public long countByUser(User user) {
     return contactrepo.countByUser(user);
 }
 
+   // Count fav contacts of user
 @Override
 public long countFavouriteByUser(User user) {
     return contactrepo.countByUserAndFavouriteTrue(user);
 }
 
+    // Get recent 5 contacts of user
 @Override
 public List<Contact> getRecentContacts(User user) {
     return contactrepo.findTop5ByUserOrderByIdDesc(user);

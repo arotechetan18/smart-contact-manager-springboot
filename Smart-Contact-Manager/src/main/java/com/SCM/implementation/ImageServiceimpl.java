@@ -25,7 +25,7 @@ public class ImageServiceimpl implements ImageService {
     public String uploadImage(MultipartFile contactImage,String filename) {
 
         // code that image upload on the server and return url
-
+    // Generate unique filename using UUID
         String filename1 = UUID.randomUUID().toString();
 
         try {
@@ -47,6 +47,8 @@ public class ImageServiceimpl implements ImageService {
        
 
     }
+    
+      // Generate optimized image URL using transformation settings
 
     @Override
     public String getUrlFromPublicId(String publicId) {

@@ -13,6 +13,7 @@ import com.SCM.entities.Contact;
 import com.SCM.services.ContactService;
 import com.SCM.services.EmailService;
 
+// Controller to handle sending emails to  contacts
 @Controller
 @RequestMapping("/user")
 public class EmailController {
@@ -20,6 +21,7 @@ public class EmailController {
     @Autowired
     private EmailService emailService;
 
+    // fetch contact details
     @Autowired
     private ContactService contactService;
 

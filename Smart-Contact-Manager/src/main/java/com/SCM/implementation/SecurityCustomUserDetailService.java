@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.SCM.entities.User;
 import com.SCM.repositories.Userepo;
+// Used to load user details during authentication
 @Service
 public class SecurityCustomUserDetailService implements UserDetailsService {
 
     @Autowired
     private Userepo userRepository;
 
+       // Load user by email (used as username)
     @Override
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
@@ -32,6 +34,8 @@ public class SecurityCustomUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("User is disabled");
         }
 
+
+        // Build Spring Security User object
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getEmail())
                 .password(user.getPassword())
