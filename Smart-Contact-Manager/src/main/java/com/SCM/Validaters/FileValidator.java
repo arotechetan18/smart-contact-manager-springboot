@@ -15,35 +15,21 @@ public class FileValidator implements ConstraintValidator<ValidFile,MultipartFil
     private static final long MAX_FILE_SIZE =1024 * 1024 * 5;
     private BufferedImage bufferedImage;
 
-    @Override
-    public boolean isValid(MultipartFile file, ConstraintValidatorContext context) {
-       
-        if(file==null || file.isEmpty()){
-            context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("File cannot be Empty").addConstraintViolation();
-            return false;
+@Override
+public boolean isValid(MultipartFile file, ConstraintValidatorContext context) {
 
-        }
-
-        //filesize
-        if(file.getSize()>MAX_FILE_SIZE){
-            context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("file size should be less than 2MB").addConstraintViolation();
-            return false;
-        }
-
-        //resoluction
-        // try {
-        //  BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
-
-        //  if(bufferedImage.getHeight())
-        // } catch (IOException e) {
-        //     // TODO Auto-generated catch block
-        //     e.printStackTrace();
-        // }
-        
+    // IF FILE EMPTY → VALID (optional)
+    if(file == null || file.isEmpty()){
         return true;
-    
     }
 
+    if(file.getSize() > MAX_FILE_SIZE){
+        context.disableDefaultConstraintViolation();
+        context.buildConstraintViolationWithTemplate("File size should be less than 5MB")
+               .addConstraintViolation();
+        return false;
+    }
+
+    return true;
+}
 }

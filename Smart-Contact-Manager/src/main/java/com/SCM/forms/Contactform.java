@@ -20,20 +20,21 @@ import lombok.ToString;
 @ToString
 public class Contactform {
 
-    @NotBlank(message = "Name is required")
+    @NotBlank(message = "Name is required *")
     private String name;
 
-    @NotBlank(message = "Email is Required")
+    @NotBlank(message = "Email is Required *")
     @Email(message = "Invalid Email address")
     private String email;
 
-    @NotBlank(message = "phonenumber is required")
+    @NotBlank(message = "phonenumber is required *")
     @Pattern(regexp = "^[0-9]{10}$",message = "Invalid Phone number")
     private String phoneNumber;
 
-    @NotBlank(message = "Address is required")
+    @NotBlank(message = "Address is required *")
     private String address;
 
+     @NotBlank(message = "description is required *")
     private String description;
 
 private boolean favourite;

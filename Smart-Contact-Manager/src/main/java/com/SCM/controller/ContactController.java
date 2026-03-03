@@ -233,8 +233,8 @@ public String searchHandler(
     // update contact from view
     @PostMapping("/update/{contactId}")
     public String updateContact(
-            @PathVariable String contactId,
-            @ModelAttribute("contactForm") Contactform contactForm,
+            @PathVariable String contactId, 
+            @Valid @ModelAttribute("contactForm") Contactform contactForm,
             Authentication authentication,
             HttpSession session) {
 
