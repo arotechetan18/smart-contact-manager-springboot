@@ -17,6 +17,8 @@ import com.SCM.helpers.ResourceNotFoundException;
 import com.SCM.repositories.Userepo;
 import com.SCM.services.UserService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -31,72 +33,72 @@ public class UserServiceImpl implements UserService {
     @Override
     public User saveUser(User user) {
 
-        //user id generate
-     String userId = UUID.randomUUID().toString();
-    user.setUserid(userId);
-     //password encoder
-    //  user.setPassword(userId);
-    user.setPassword(passwordEncoder.encode(user.getPassword()));
-     
-    //set user role
+        // user id generate
+        String userId = UUID.randomUUID().toString();
+        user.setUserid(userId);
+        // password encoder
+        // user.setPassword(userId);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        // set user role
         user.setRoleList(List.of(AppConstant.ROLE_USER));
-    logger.info(user.getProvider().toString());
-      return  userRepo.save(user);
+        logger.info(user.getProvider().toString());
+        return userRepo.save(user);
     }
 
     @Override
     public Optional<User> getUserById(String userId) {
-        
+
         return userRepo.findById(userId);
     }
 
     @Override
-    public Optional<User>  updateUser(User user) {
-    User user2=  userRepo.findById(user.getUserid()).orElseThrow(()->new ResourceNotFoundException());
-   //update user2 from user
-    user2.setName( user.getName());
-    user2.setEmail( user.getEmail());
-    user2.setPassword( user.getPassword());
-    user2.setAbout( user.getAbout());
-    user2.setPhoneNumber( user.getPhoneNumber());
-    user2.setProfilePic( user.getProfilePic());
-    user2.setEnabled(user.isEnabled());
-    user2.setEmailVerified(user.isEmailVerified());
-    user2.setPhoneVerified(user.isPhoneVerified());
-    user2.setProvider(user.getProvider());
-    user2.setProvideUserId( user.getProvideUserId());
+    public Optional<User> updateUser(User user) {
+        User user2 = userRepo.findById(user.getUserid()).orElseThrow(() -> new ResourceNotFoundException());
+        // update user2 from user
+        user2.setName(user.getName());
+        user2.setEmail(user.getEmail());
+        user2.setPassword(user.getPassword());
+        user2.setAbout(user.getAbout());
+        user2.setPhoneNumber(user.getPhoneNumber());
+        user2.setProfilePic(user.getProfilePic());
+        user2.setEnabled(user.isEnabled());
+        user2.setEmailVerified(user.isEmailVerified());
+        user2.setPhoneVerified(user.isPhoneVerified());
+        user2.setProvider(user.getProvider());
+        user2.setProvideUserId(user.getProvideUserId());
 
-    //save the updated user in database
-    User save = userRepo.save(user2);
+        // save the updated user in database
+        User save = userRepo.save(user2);
 
-    return Optional.ofNullable(save);
-    
+        return Optional.ofNullable(save);
+
     }
 
     @Override
     public User deleteUser(String userId) {
-        User user=  userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException());
-      userRepo.delete(user);
-      return user;
-      
+        User user = userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException());
+        userRepo.delete(user);
+        return user;
+
     }
 
     @Override
     public boolean isUserExists(String userId) {
-       User user2=userRepo.findById(userId).orElse(null);
+        User user2 = userRepo.findById(userId).orElse(null);
 
-       return user2 !=null?true:false;  
+        return user2 != null ? true : false;
     }
 
     @Override
     public boolean isUserExistsByEmail(String email) {
-     User user= userRepo.findByEmail(email).orElse(null);
-        return user !=null?true:false;  
+        User user = userRepo.findByEmail(email).orElse(null);
+        return user != null ? true : false;
     }
 
     @Override
     public List<User> getAllUsers() {
-       return userRepo.findAll();
+        return userRepo.findAll();
     }
 
     @Override
@@ -104,29 +106,30 @@ public class UserServiceImpl implements UserService {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'saveUser'");
     }
-@Override
-public User getUserByEmail(String email) {
 
-    Optional<User> optionalUser = userRepo.findByEmail(email);
+    @Transactional
+    @Override
+    public User getUserByEmail(String email) {
 
-    if (optionalUser.isPresent()) {
-        return optionalUser.get();
+        Optional<User> optionalUser = userRepo.findByEmail(email);
+
+        if (optionalUser.isPresent()) {
+            return optionalUser.get();
+        }
+
+        // If user not found, create new OAuth user
+        User newUser = new User();
+        newUser.setUserid(UUID.randomUUID().toString());
+        newUser.setEmail(email);
+        newUser.setName(email); // or extract proper name
+        newUser.setPassword(passwordEncoder.encode("default123"));
+        newUser.setRoleList(List.of(AppConstant.ROLE_USER));
+        newUser.setEnabled(true);
+        newUser.setEmailVerified(true);
+
+        logger.info("New OAuth user created: " + email);
+
+        return userRepo.save(newUser);
     }
-
-    // If user not found, create new OAuth user
-    User newUser = new User();
-    newUser.setUserid(UUID.randomUUID().toString());
-    newUser.setEmail(email);
-    newUser.setName(email); // or extract proper name
-    newUser.setPassword(passwordEncoder.encode("default123"));
-    newUser.setRoleList(List.of(AppConstant.ROLE_USER));
-    newUser.setEnabled(true);
-    newUser.setEmailVerified(true);
-
-    logger.info("New OAuth user created: " + email);
-
-    return userRepo.save(newUser);
-}
-    
 
 }
