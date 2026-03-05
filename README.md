@@ -6,6 +6,16 @@
 Smart Contact Manager is a **full-stack Java web application** built using **Spring Boot** and **Thymeleaf** that enables users to securely store and manage their personal contacts online. It follows the MVC architecture and demonstrates key backend and frontend web development skills.
 
 ---
+## 🌐 Live Demo
+
+👉 https://smart-contact-manager-springboot.onrender.com
+
+---
+## 📌 Repository Link
+
+👉 https://github.com/arotechetan18/Smart-Contact-Manager-springboot
+
+---
 
 ## 📌 Project Overview
 
@@ -247,6 +257,13 @@ After startup, open in browser:
 http://localhost:8080
 ```
 
+## 📸 Project Screenshots
+<div align="center">
+<h1>🏠 Home & profile Pages</h1>
+<p> <img src="Screenshot 2026-03-05 111457.png" width="45%" style="margin:10px" />  <img src="Screenshot 2026-03-05 111636.png" width="45%" style="margin:10px" /> </p>
+<h1>📊 Dashboard &  Add Contact </h1><P>
+<img src="Screenshot 2026-03-05 111552.png" width="45%" style="margin:10px" />
+  <img src="Screenshot 2026-03-05 111717.png" width="45%" style="margin:10px" /> </p> </div>
 
 ## 🚀 Future Enhancements
 
@@ -261,3 +278,8 @@ http://localhost:8080
 ## 🙌 Author
 
 **Chetan Arote** — Aspiring Full-Stack Developer ✨
+
+---
+
+
+
