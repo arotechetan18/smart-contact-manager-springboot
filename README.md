@@ -275,6 +275,11 @@ http://localhost:8080
 
 ---
 
+## ⭐ Support
+
+If you like this project, consider giving it a star ⭐ on GitHub to support the work
+
+---
 ## 🙌 Author
 
 **Chetan Arote** — Aspiring Full-Stack Developer ✨
